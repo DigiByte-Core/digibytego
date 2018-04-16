@@ -1,16 +1,16 @@
 
 
-# DigiByteGo Backup and Restore Notes
+# Copay Backup and Restore Notes
 
 ## Description
 
-DigiByteGo is a Multisig HD Wallet. DigiByteGo app holds the extended private keys for the wallet. The private key never leaves the device, so for accessing a wallet funds it is necesary to have the device or a backup of the wallet.
+Copay is a Multisig HD Wallet. Copay app holds the extended private keys for the wallet. The private key never leaves the device, so for accessing a wallet funds it is necesary to have the device or a backup of the wallet.
 
 ## Definitions
 
 ### Backup Formats:
- * Wallet recovery phrase (RP): 12 words mnemonic backup (available from DigiByteGo v1.2+). The 12 words are used as wallet seed, following BIP39 specification. The wallet RP may require a passphrase to recreate the wallet (if one was specified at creation time).
- * Wallet Backup (WB): Exported data from DigiByteGo, containing an AES encrypted JSON with many wallet parameters (like extended private key, wallet name, extended public keys of copayers, etc. See #export-format). This data can be created from DigiByteGo v1.2+ (Settings -> Advanced -> Export) and it was the default backup format on previous DigiByteGo versions. WB can be a file (standard format for DigiByteGo desktop versions) or a text (standard for DigiByteGo mobile versions).
+ * Wallet recovery phrase (RP): 12 words mnemonic backup (available from Copay v1.2+). The 12 words are used as wallet seed, following BIP39 specification. The wallet RP may require a passphrase to recreate the wallet (if one was specified at creation time).
+ * Wallet Backup (WB): Exported data from Copay, containing an AES encrypted JSON with many wallet parameters (like extended private key, wallet name, extended public keys of copayers, etc. See #export-format). This data can be created from Copay v1.2+ (Settings -> Advanced -> Export) and it was the default backup format on previous Copay versions. WB can be a file (standard format for Copay desktop versions) or a text (standard for Copay mobile versions).
 
 ### Backup recovery cases
  * Case 1: Lost of device holding the wallet
@@ -72,21 +72,3 @@ DigiByteGo is a Multisig HD Wallet. DigiByteGo app holds the extended private ke
       - Wallet should be recreated and funds should be accesable
 
       In this case, Copayers will not be able to decrypt the 'notes' field on the new Spend Proposals, because the shared secret stored at the WB is not longer known by other copayers.
-
-
-### Hardware wallets
-
-In case hardware based wallet is created and then the hardware device is lost, it is possible, using DigiByteGo, to access the funds in case the hardware device seed (mnemonic) is available.
-
-In order to recover a hardware wallet you need to enter the RP in
-   Create or the Join wallet -> Advance options -> specify RP.
-
-You can select the account you need to import and select if the wallet is multisig or not thru the `derivation path`: DigiByteGo uses `m/48'` for multisignature hardware wallets, and `m/44'` for all the other wallet types. The format is the following:
-
-  m/XX'/<coin_type>'/<account'>
-
-For harward wallets, `coin_type` is always `0`.
-
-For example, if you need to import a non-multisignatured wallet, account 8, you should enter: `m/44'/0'/8'`
-Note that TREZOR use 1-based account numbers, so if your are trying for example to recover TREZOR multisig account #8, you should enter `m/48'/0'/7'`.
-
