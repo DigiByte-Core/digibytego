@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { resolve } from 'path';
 import * as encoding from 'text-encoding';
 import { Logger } from '../../providers/logger/logger';
 
 // providers
-import { AppProvider } from '../app/app';
 import { BwcProvider } from '../../providers/bwc/bwc';
+import { AppProvider } from '../app/app';
 import { ConfigProvider } from '../config/config';
 import { HomeIntegrationsProvider } from '../home-integrations/home-integrations';
-import { resolve } from 'path';
 import { PersistenceProvider } from '../persistence/persistence';
 import { ProfileProvider } from '../profile/profile';
 
@@ -129,7 +129,7 @@ export class DigiIDProvider {
       
           const pubKeyAddress = derived.privateKey.toAddress();
           const fullMessage = this._createMessage(signedMessage, pubKeyAddress.toString());
-          return fullMessage;
+          return resolve(fullMessage);
       });
     });
   }
@@ -149,12 +149,14 @@ export class DigiIDProvider {
   }
 
   public signMessage(): Promise<object> {
-    const wallets = this.profileProvider.getWallets();
-    const xpriv = wallets[0].credentials.xPrivKey;
-    var hdPrivateKey = this.bitcore.HDPrivateKey(xpriv);
-    return this.generateSignatureMessage(hdPrivateKey)
-      .then(msg => {
-        return msg;
+    return new Promise((resolve, reject) => {
+      const wallets = this.profileProvider.getWallets();
+      const xpriv = wallets[0].credentials.xPrivKey;
+      var hdPrivateKey = this.bitcore.HDPrivateKey(xpriv);
+      this.generateSignatureMessage(hdPrivateKey)
+        .then(msg => {
+          return resolve(msg);
+        });
       });
   }
 
@@ -166,24 +168,24 @@ export class DigiIDProvider {
         host: this._parsed.host,
         address: msg.address,
         success: false,
-        time: Date.now() / 1000 | 0
+        time: Math.floor(Date.now() / 1000)
       };
       const wallets = this.profileProvider.getWallets();
       this.persistenceProvider.getDigiIdHistory(wallets[0].id)
         .then((history: any) => {
-          localHistory = JSON.parse(history) || [];
+          localHistory = history || [];
           return this.http.post(this._getCallBackURL(), msg)
         })
         .then(values => {
           obj.success = true;
           localHistory.unshift(obj);
           this.logger.info("SUCCESS: Feedback sent");
-          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, JSON.stringify(localHistory));
+          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, localHistory);
         })
         .catch(err => {
           localHistory.unshift(obj);
           this.logger.info("ERROR: Feedback sent anyway.");
-          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, JSON.stringify(localHistory)).then(() => reject());
+          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, localHistory).then(() => reject());
         });
     });
   }

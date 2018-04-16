@@ -1072,7 +1072,7 @@ msgstr ""
 msgid "No access key defined"
 msgstr "アクセスキーが定義されていません"
 
-msgid "No backup, no bitcoin."
+msgid "no backup, no digibyte."
 msgstr "バックアップは非常に重要です！"
 
 msgid "No contacts yet"

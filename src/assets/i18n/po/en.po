@@ -1196,8 +1196,8 @@ msgstr "No"
 msgid "No access key defined"
 msgstr "No access key defined"
 
-msgid "No backup, no bitcoin."
-msgstr "No backup, no bitcoin."
+msgid "no backup, no digibyte."
+msgstr "no backup, no digibyte."
 
 msgid "No contacts yet"
 msgstr "No contacts yet"

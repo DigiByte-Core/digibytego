@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "No access key defined"
 msgstr "授权密钥未定义"
 
-msgid "No backup, no bitcoin."
+msgid "no backup, no digibyte."
 msgstr "没有备份，没有比特币。"
 
 msgid "No contacts yet"

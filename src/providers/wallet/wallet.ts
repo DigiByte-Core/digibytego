@@ -649,8 +649,8 @@ export class WalletProvider {
     wallet.hasUnsafeConfirmed = false;
 
     lodash.each(txs, (tx: any) => {
-      tx = this.txFormatProvider.processTx(wallet.coin, tx);
-
+      tx = this.txFormatProvider.processTx(tx);
+      console.log(tx)
       // no future transactions...
       if (tx.time > now)
         tx.time = now;

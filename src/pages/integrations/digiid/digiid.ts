@@ -4,6 +4,8 @@ import * as _ from 'lodash';
 import { Logger } from '../../../providers/logger/logger';
 
 import { DigiIDProvider } from '../../../providers/digiid/digiid';
+import { PersistenceProvider } from '../../../providers/persistence/persistence';
+import { ProfileProvider } from '../../../providers/profile/profile';
 
 
 @Component({
@@ -13,20 +15,30 @@ import { DigiIDProvider } from '../../../providers/digiid/digiid';
 export class DigiidPage {
 
   public shifts: any;
-  public network: string;
+  public history: any;
+  public wallets: any;
 
   constructor(
     private events: Events,
     private logger: Logger,
-    private digiidProvider: DigiIDProvider
+    private digiidProvider: DigiIDProvider,
+    private persistenceProvider: PersistenceProvider,
+    private profileProvider: ProfileProvider
   ) {
     this.shifts = { data: {} };
+    this.wallets = this.profileProvider.getWallets();
+    this.persistenceProvider.getDigiIdHistory(this.wallets[0].id)
+     .then(history => {
+       console.log(history);
+       this.history = history;
+     });
   }
 
   ionViewDidLoad() {
     this.logger.info('ionViewDidLoad DigiID Page');
-    this.digiidProvider.setAddress('digiid://digiid.digibyteprojects.com/callback?x=fd40d7a087105eeb');
-    this.digiidProvider.signMessage();
+    // this.digiidProvider.setAddress('digiid://digiid.digibyteprojects.com/callback?x=fd40d7a087105eeb');
+    //this.digiidProvider.signMessage()
+    //  .then(msg => this.digiidProvider.authorize(msg));
   }
 
 }

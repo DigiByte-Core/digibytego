@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "No access key defined"
 msgstr "Geen toegangsknop ingesteld"
 
-msgid "No backup, no bitcoin."
+msgid "no backup, no digibyte."
 msgstr "Geen backup, geen bitcoin."
 
 msgid "No contacts yet"

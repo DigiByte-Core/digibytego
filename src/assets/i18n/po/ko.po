@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "No access key defined"
 msgstr "액세스 키가 정의되지 않았습니다"
 
-msgid "No backup, no bitcoin."
+msgid "no backup, no digibyte."
 msgstr "백업도, 비트코인도 없습니다."
 
 msgid "No contacts yet"

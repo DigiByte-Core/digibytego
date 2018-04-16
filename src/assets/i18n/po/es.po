@@ -1070,7 +1070,7 @@ msgstr "No"
 msgid "No access key defined"
 msgstr "No se ha definido la llave de acceso"
 
-msgid "No backup, no bitcoin."
+msgid "no backup, no digibyte."
 msgstr "Sin copia de seguridad, no hay bitcoins."
 
 msgid "No contacts yet"

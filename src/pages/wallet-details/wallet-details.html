@@ -8,6 +8,7 @@
   <div class="balance-card" [ngStyle]="{'background': wallet.color}">
     <div class="balance-header">
       <div (longPress)="toggleBalance()">
+        {{updateStatusError}} {{wallet.scanning}} {{wallet.status}}
         <div (tap)="updateAll(true)" *ngIf="!updateStatusError && !wallet.balanceHidden && !wallet.scanning && wallet.status">
           <div class="balance-str">{{wallet.status.totalBalanceStr}}</div>
           <div class="balance-alt-str" *ngIf="wallet.network != 'testnet'">
