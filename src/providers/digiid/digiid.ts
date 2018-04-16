@@ -9,9 +9,9 @@ import { AppProvider } from '../app/app';
 import { BwcProvider } from '../../providers/bwc/bwc';
 import { ConfigProvider } from '../config/config';
 import { HomeIntegrationsProvider } from '../home-integrations/home-integrations';
-import { ProfileProvider } from '../profile/profile';
-import { PersistenceProvider } from '../persistence/persistence';
 import { resolve } from 'path';
+import { PersistenceProvider } from '../persistence/persistence';
+import { ProfileProvider } from '../profile/profile';
 
 @Injectable()
 export class DigiIDProvider {
@@ -172,7 +172,6 @@ export class DigiIDProvider {
       this.persistenceProvider.getDigiIdHistory(wallets[0].id)
         .then((history: any) => {
           localHistory = JSON.parse(history) || [];
-          console.log(localHistory);
           return this.http.post(this._getCallBackURL(), msg)
         })
         .then(values => {
@@ -184,7 +183,7 @@ export class DigiIDProvider {
         .catch(err => {
           localHistory.unshift(obj);
           this.logger.info("ERROR: Feedback sent anyway.");
-          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, JSON.stringify(localHistory)).then(() => { return reject() });
+          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, JSON.stringify(localHistory)).then(() => reject());
         });
     });
   }
