@@ -1,4 +1,4 @@
-wallet-selector {
+incoming-data-menu {
   display: flex;
   justify-content: center;
   .backdrop {
@@ -7,9 +7,9 @@ wallet-selector {
     position: absolute;
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
   }
-  .wallet-selector {
+  .incoming-data-menu {
     position: absolute;
     bottom: 0;
     left: 0;

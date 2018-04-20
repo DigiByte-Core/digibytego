@@ -21,6 +21,7 @@ import { TouchID } from '@ionic-native/touch-id';
 /* Modules */
 import { TranslatePoHttpLoader } from '@biesbjerg/ngx-translate-po-http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MomentModule } from 'angular2-moment';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 
@@ -42,7 +43,6 @@ import { FeedbackCompletePage } from '../pages/feedback/feedback-complete/feedba
 import { FeedbackPage } from '../pages/feedback/feedback/feedback';
 import { SendFeedbackPage } from '../pages/feedback/send-feedback/send-feedback';
 import { FinishModalPage } from '../pages/finish/finish';
-import { IncomingDataMenuPage } from '../pages/incoming-data-menu/incoming-data-menu';
 import { BackupRequestPage } from '../pages/onboarding/backup-request/backup-request';
 import { CollectEmailPage } from '../pages/onboarding/collect-email/collect-email';
 import { DisclaimerPage } from '../pages/onboarding/disclaimer/disclaimer';
@@ -74,6 +74,7 @@ import { ShapeshiftShiftPage } from '../pages/integrations/shapeshift/shapeshift
 import { CardItemPage } from '../pages/includes/card-item/card-item';
 import { FeedbackCardPage } from '../pages/includes/feedback-card/feedback-card';
 import { GravatarPage } from '../pages/includes/gravatar/gravatar';
+import { IncomingDataMenuPage } from '../pages/incoming-data-menu/incoming-data-menu';
 import { TxpPage } from '../pages/includes/txp/txp';
 import { WalletActivityPage } from '../pages/includes/wallet-activity/wallet-activity';
 import { WalletItemPage } from '../pages/includes/wallet-item/wallet-item';
@@ -297,7 +298,8 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    ZXingScannerModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -378,10 +378,9 @@ export class WalletProvider {
         if (err) {
           let prefix = this.translate.instant('Could not create address');
           if (err instanceof this.errors.CONNECTION_ERROR || (err.message && err.message.match(/5../))) {
-            this.logger.warn(err);
-            return setTimeout(() => {
-              this.createAddress(wallet);
-            }, 5000);
+            this.bwcErrorProvider.cb(err, prefix).then((msg) => {
+              return reject(msg);
+            });
           } else if (
             err instanceof this.errors.MAIN_ADDRESS_GAP_REACHED || (err.message && err.message == 'MAIN_ADDRESS_GAP_REACHED')
           ) {

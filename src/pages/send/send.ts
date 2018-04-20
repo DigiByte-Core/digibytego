@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-import { Logger } from '../../providers/logger/logger';
+import { Events, NavController } from 'ionic-angular';
+import * as _ from 'lodash';
 
 // providers
 import { AddressBookProvider } from '../../providers/address-book/address-book';
 import { AddressProvider } from '../../providers/address/address';
+import { ExternalLinkProvider } from '../../providers/external-link/external-link';
 import { IncomingDataProvider } from '../../providers/incoming-data/incoming-data';
+import { Logger } from '../../providers/logger/logger';
 import { PopupProvider } from '../../providers/popup/popup';
 import { ProfileProvider } from '../../providers/profile/profile';
 import { WalletProvider } from '../../providers/wallet/wallet';
 
 // pages
+import { AddressbookAddPage } from '../settings/addressbook/add/add';
 import { AmountPage } from './amount/amount';
-
-import * as _ from 'lodash';
+import { PaperWalletPage } from '../paper-wallet/paper-wallet';
 
 @Component({
   selector: 'page-send',
@@ -39,7 +41,9 @@ export class SendPage {
     private logger: Logger,
     private incomingDataProvider: IncomingDataProvider,
     private popupProvider: PopupProvider,
-    private addressProvider: AddressProvider
+    private addressProvider: AddressProvider,
+    private events: Events,
+    private externalLinkProvider: ExternalLinkProvider
   ) { }
 
   ionViewDidLoad() {
@@ -49,6 +53,24 @@ export class SendPage {
   ionViewWillEnter() {
     this.walletsAny = this.profileProvider.getWallets();
     this.hasAnyWallets = !(_.isEmpty(this.walletsAny));
+
+    this.events.subscribe('finishIncomingDataMenuEvent', (data) => {
+      switch (data.redirTo) {
+        case 'AmountPage':
+          this.sendPaymentToAddress(data.value);
+          break;
+        case 'AddressBookPage':
+          this.addToAddressBook(data.value);
+          break;
+        case 'OpenExternalLink':
+          this.goToUrl(data.value);
+          break;
+        case 'PaperWalletPage':
+          this.scanPaperWallet(data.value);
+          break;
+      }
+    });
+
     this.updateWalletsList();
     this.updateContactsList();
   }
@@ -56,6 +78,23 @@ export class SendPage {
   ionViewDidEnter() {
     this.search = '';
   }
+
+  private goToUrl(url: string): void {
+    this.externalLinkProvider.open(url);
+  }
+
+  private sendPaymentToAddress(bitcoinAddress: string): void {
+    this.navCtrl.push(AmountPage, { toAddress: bitcoinAddress });
+  }
+
+  private addToAddressBook(bitcoinAddress: string): void {
+    this.navCtrl.push(AddressbookAddPage, { addressbookEntry: bitcoinAddress });
+  }
+
+  private scanPaperWallet(privateKey: string) {
+    this.navCtrl.push(PaperWalletPage, { privateKey });
+  }
+
 
   private updateWalletsList(): void {
     this.walletList = [];

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { App, Events, NavController } from 'ionic-angular';
+import { App, Events, NavControllerBase } from 'ionic-angular';
 import { Logger } from '../../providers/logger/logger';
 
 // providers
@@ -19,7 +19,7 @@ import { ConfirmPage } from '../../pages/send/confirm/confirm';
 
 @Injectable()
 export class IncomingDataProvider {
-  private navCtrl: NavController;
+  private navCtrl: NavControllerBase;
   constructor(
     private app: App,
     private events: Events,
@@ -36,7 +36,7 @@ export class IncomingDataProvider {
   }
 
   public showMenu(data: any): void {
-    this.events.publish('incomingDataMenu.showMenu', data);
+    this.events.publish('showIncomingDataMenuEvent', data);
   }
 
   public redir(data: string): boolean {

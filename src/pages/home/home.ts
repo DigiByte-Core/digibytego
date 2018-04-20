@@ -80,7 +80,7 @@ export class HomePage {
     private popupProvider: PopupProvider,
     private modalCtrl: ModalController,
     private addressBookProvider: AddressBookProvider,
-    private app: AppProvider,
+    private appProvider: AppProvider,
     private platformProvider: PlatformProvider,
     private homeIntegrationsProvider: HomeIntegrationsProvider,
     private persistenceProvider: PersistenceProvider,
@@ -145,6 +145,10 @@ export class HomePage {
       this.handleDeepLinks();
     }
 
+    if (this.platformProvider.isNW) {
+      this.handleDeepLinksNW();
+    }
+
     // Show integrations
     let integrations = _.filter(this.homeIntegrationsProvider.get(), { 'show': true });
 
@@ -169,6 +173,28 @@ export class HomePage {
       this.updateTxps();
       this.setWallets();
     });
+  }
+
+  private handleDeepLinksNW() {
+
+    var gui = (window as any).require('nw.gui');
+
+    // This event is sent to an existent instance of Copay (only for standalone apps)
+    gui.App.on('open', (pathData) => {
+      if (pathData.indexOf(/^bitcoin(cash)?:/) != -1) {
+        this.logger.debug('Bitcoin URL found');
+        this.handleOpenUrl(pathData.substring(pathData.indexOf(/^bitcoin(cash)?:/)));
+      } else if (pathData.indexOf(this.appProvider.info.name + '://') != -1) {
+        this.logger.debug(this.appProvider.info.name + ' URL found');
+        this.handleOpenUrl(pathData.substring(pathData.indexOf(this.appProvider.info.name + '://')));
+      }
+    });
+
+    // Used at the startup of Copay
+    var argv = gui.App.argv;
+    if (argv && argv[0]) {
+      this.handleOpenUrl(argv[0]);
+    }
   }
 
   private handleDeepLinks() {
@@ -350,7 +376,7 @@ export class HomePage {
         this.logger.debug('Update available:', result.updateAvailable);
         if (result.updateAvailable) {
           this.newRelease = true;
-          this.updateText = 'There is a new version of ' + this.app.info.nameCase + ' available';
+          this.updateText = 'There is a new version of ' + this.appProvider.info.nameCase + ' available';
         }
       })
       .catch((err) => {
