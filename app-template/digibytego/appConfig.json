@@ -1,0 +1,33 @@
+{
+  "packageName": "digibytego",
+  "packageDescription": "DigiByteGo Wallet",
+  "packageNameId": "io.digibyte.digibytego",
+  "themeColor": "#002252",
+  "userVisibleName": "DigiByteGo",
+  "purposeLine": "DigiByteGo Wallet",
+  "bundleName": "digibytego",
+  "appUri": "digibytego",
+  "name": "digibyte go",
+  "nameNoSpace": "digibytego",
+  "nameCase": "DigiByte Go",
+  "nameCaseNoSpace": "DigiByteGo",
+  "gitHubRepoName": "digibytego",
+  "gitHubRepoUrl": "git://github.com/digibyte/digibytego.git",
+  "gitHubRepoBugs": "https://github.com/digibyte/digibytego/issues",
+  "disclaimerUrl": "https://digibyte.io/disclaimer",
+  "url": "https://digibyte.io",
+  "appDescription": "DigiByteGo Wallet",
+  "winAppName": "DigiByteGoWallet",
+  "WindowsStoreIdentityName": "18C7659D.DigiByteGo-SecureDigiByteWallet",
+  "WindowsStoreDisplayName": "DigiByteGo - Secure DigiByte Wallet",
+  "windowsAppId": "804636ee-b017-4cad-8719-e58ac97ffa5c",
+  "pushSenderId": "1036948132229",
+  "description": "A Secure DigiByte Wallet",
+  "version": "4.1.2",
+  "androidVersion": "41000002",
+  "_extraCSS": null,
+  "_enabledExtensions": {
+    "digiid": true,
+    "shapeshift": true
+  }
+}

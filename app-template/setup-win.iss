@@ -3,7 +3,7 @@
 
 #define MyAppName "*USERVISIBLENAME*"
 #define MyAppVersion "*VERSION*"
-#define MyAppPublisher "DigiByte Foundation"
+#define MyAppPublisher "DigiByte"
 #define MyAppURL "*URL*"
 #define MyAppExeName "*USERVISIBLENAME*.exe"
 #define AppId "*WINDOWSAPPID*"
