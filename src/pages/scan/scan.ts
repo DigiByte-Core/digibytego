@@ -12,7 +12,7 @@ import { PlatformProvider } from '../../providers/platform/platform';
 import { ScanProvider } from '../../providers/scan/scan';
 
 // pages
-import { IncomingDataMenuPage } from '../incoming-data-menu/incoming-data-menu';
+import { IncomingDataMenuPage } from '../includes/incoming-data-menu/incoming-data-menu';
 import { PaperWalletPage } from '../paper-wallet/paper-wallet';
 import { AmountPage } from '../send/amount/amount';
 import { AddressbookAddPage } from '../settings/addressbook/add/add';
