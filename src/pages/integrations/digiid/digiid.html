@@ -1,5 +1,41 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>DigiID</ion-title>
+    <ion-title>DigiID History</ion-title>
   </ion-navbar>
 </ion-header>
+
+<ion-content no-bounce>
+    <ion-list *ngIf="history && history[0]" class="tx-history">
+        <div *ngFor="let tx of history; trackBy: trackByFn; let i = index">
+    
+          <button ion-item >
+            <ion-icon item-start>
+              <div *ngIf="tx.success">
+                <span>
+                    <img class="icon-services" src="assets/img/success.svg"  width="40">
+                </span>
+              </div>
+              <div *ngIf="!tx.success">
+                  <span>
+                      <img class="icon-services" src="assets/img/cancel.svg"  width="40">
+                  </span>
+                </div>
+            </ion-icon>
+    
+            <div class="action">
+              <span>{{tx.host}}</span>
+            </div>
+    
+    
+            <ion-note item-end text-end>
+              <div class="amount">
+                <span class="received">{{tx.address}}</span>
+              </div>
+              <div class="date">
+                <span>{{tx.time * 1000 | amDateFormat:'MMM D, YYYY'}}</span>
+              </div>
+            </ion-note>
+          </button>
+        </div>
+      </ion-list>  
+</ion-content>

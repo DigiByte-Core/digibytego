@@ -66,7 +66,7 @@
     "fix:prettier":           "prettier --write '{*,**/*}.{js,ts,md,json,scss}'",
     "e2e":                    "npm run ionic:build && npm run e2e:test",
     "e2e:test":               "protractor",
-    "e2e:capture-latest":     "npm run apply:digibytego && npm run e2e && npm run apply:bitpay && npm run e2e",
+    "e2e:capture-latest":     "npm run apply:digibytego && npm run e2e",
     "e2e:update":             "webdriver-manager update --gecko false",
     "extract":                "ngx-translate-extract --input ./src --output ./src/assets/i18n/po/template.pot --clean --sort --format pot",
     "start:ios":              "npm run build:ios && npm run open:ios",
@@ -88,7 +88,7 @@
     "log:android":            "adb logcat | grep chromium",
     "sign:android":           "rm -f platforms/android/app/build/outputs/apk/release/android-release-signed-aligned.apk; jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../digibytego.keystore -signedjar platforms/android/app/build/outputs/apk/release/android-release-signed.apk platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk  digibytego_play && $ANDROID_HOME/build-tools/26.0.1/zipalign -v 4 platforms/android/app/build/outputs/apk/release/android-release-signed.apk platforms/android/app/build/outputs/apk/release/android-release-signed-aligned.apk",
     "apply:digibytego":       "npm i fs-extra shelljs && cd app-template && node apply.js digibytego && cd .. && npm i",
-    "fix:fcm":                "echo platforms/ios/DigiByte/Resources platforms/ios/DigiByte/Resources/Resources | xargs -n 1 cp GoogleService-Info.plist 2>/dev/null; mkdir -p platforms/android/app/src/debug platforms/android/app/src/release; echo platforms/android/app/src/debug platforms/android/app/src/release platforms/android/app | xargs -n 1 cp google-services.json"
+    "fix:fcm":                "echo platforms/ios/digibytego/Resources platforms/ios/digibytego/Resources/Resources | xargs -n 1 cp GoogleService-Info.plist 2>/dev/null; mkdir -p platforms/android/app/src/debug platforms/android/app/src/release; echo platforms/android/app/src/debug platforms/android/app/src/release platforms/android/app | xargs -n 1 cp google-services.json"
   },
   "dependencies": {
     "@angular/common": "5.2.9",
@@ -228,6 +228,7 @@
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "digibyte",
         "SECOND_URL_SCHEME": "*PACKAGENAME*",
+        "SECOND_URL_SCHEME": "digiid",
         "ANDROID_SCHEME": " ",
         "ANDROID_HOST": " ",
         "ANDROID_PATHPREFIX": "/"
