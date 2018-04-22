@@ -123,24 +123,28 @@ export class DigiIDProvider {
     return 'str';
   }
 
-  public generateSignatureMessage(hdPrivateKey): Promise<object> {
+  public generateSignatureMessage(hdPrivateKey, index: number = 0): Promise<object> {
     return new Promise((resolve, reject) => {
-    const messageBuffer = new this.bitcore.deps.Buffer(this.getDigIDSiteURI());
-    const sha256URL = this.bitcore.crypto.Hash.sha256(messageBuffer);
-    const buffer = new encoding.TextEncoder("utf-8").encode(this.getDigIDSiteURI());
-      crypto.subtle.digest("SHA-256", buffer)
-        .then((buf: any) => {
-          const sha32uri = sha256URL.readInt32LE(1);
-          const derived = hdPrivateKey.derive("m/" + sha32uri + "/0");
-      
-          const message = this._getMessageToSign();
-      
-          const signedMessage = this.sign(message, derived.privateKey);
-      
-          const pubKeyAddress = derived.privateKey.toAddress();
-          const fullMessage = this._createMessage(signedMessage, pubKeyAddress.toString());
-          return resolve(fullMessage);
-      });
+      const BN = this.bitcore.crypto.BN;
+      const hardened = new BN(0x80000000);
+      const messageBuffer = new this.bitcore.deps.Buffer(`${index}${this.getDigIDSiteURI()}`);
+      const sha256URL = this.bitcore.crypto.Hash.sha256(messageBuffer);
+      const hardenedPath = [ 
+        new BN(13).or(hardened),
+        new BN(sha256URL.readUInt32LE(0)).or(hardened),
+        new BN(sha256URL.readUInt32LE(1)).or(hardened),
+        new BN(sha256URL.readUInt32LE(2)).or(hardened),
+        new BN(sha256URL.readUInt32LE(3)).or(hardened)
+      ];
+      const derived = hdPrivateKey.derive(`m/${hardenedPath.join('/')}`);
+  
+      const message = this._getMessageToSign();
+  
+      const signedMessage = this.sign(message, derived.privateKey);
+  
+      const pubKeyAddress = derived.privateKey.toAddress();
+      const fullMessage = this._createMessage(signedMessage, pubKeyAddress.toString());
+      return resolve(fullMessage);
     });
   }
 
