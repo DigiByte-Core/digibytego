@@ -2,7 +2,7 @@ var NwBuilder = require('nw-builder');
 var nw = new NwBuilder({
   files: ['./package.json', './www/**/*'],
   appName: '*USERVISIBLENAME*',
-  platforms: ['win64', 'osx64', 'linux64'],
+  platforms: ['win', 'osx64', 'linux'],
   buildDir: './desktop',
   version: '0.19.5',
   macIcns: './resources/*PACKAGENAME*/mac/app.icns',
