@@ -28,6 +28,6 @@
   "_extraCSS": null,
   "_enabledExtensions": {
     "digiid": true,
-    "shapeshift": true
+    "shapeshift": false
   }
 }

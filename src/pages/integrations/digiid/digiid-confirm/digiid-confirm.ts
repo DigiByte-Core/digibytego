@@ -8,7 +8,7 @@ import { ProfileProvider } from '../../../../providers/profile/profile';
 import { DigiIDProvider } from '../../../../providers/digiid/digiid';
 
 // Pages
-import { HomePage } from '../../../home/home';
+import { DigiidPage } from '../digiid';
 import { DigiidFailurePage } from '../digiid-failure/digiid-failure';
 import { DigiidSuccessPage } from '../digiid-success/digiid-success';
 
@@ -80,7 +80,7 @@ export class DigiidConfirmPage {
           let modal = this.modalCtrl.create(DigiidSuccessPage, { }, { showBackdrop: true, enableBackdropDismiss: false });
           modal.present();
           modal.onDidDismiss(() => {
-            this.navCtrl.push(HomePage);
+            this.navCtrl.push(DigiidPage);
           });
         })
       .catch(err => {
@@ -89,7 +89,7 @@ export class DigiidConfirmPage {
           let modal = this.modalCtrl.create(DigiidFailurePage, { error: err.error }, { showBackdrop: true, enableBackdropDismiss: false });
           modal.present();
           modal.onDidDismiss(() => {
-            this.navCtrl.push(HomePage);
+            this.navCtrl.push(DigiidPage);
           }); 
         });
       });
