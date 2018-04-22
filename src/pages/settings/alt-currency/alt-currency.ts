@@ -42,7 +42,7 @@ export class AltCurrencyPage {
     this.unusedCurrencyList = [{
       isoCode: 'LTL'
     }, {
-      isoCode: 'BTC'
+      isoCode: 'DGB'
     }];
   }
 

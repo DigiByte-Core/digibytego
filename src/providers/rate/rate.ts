@@ -12,7 +12,7 @@ export class RateProvider {
   private SAT_TO_BTC: number;
   private BTC_TO_SAT: number;
 
-  private rateServiceUrl = 'https://bitpay.com/api/rates';
+  private rateServiceUrl = 'https://digibyte.io/rates';
 
   constructor(private http: HttpClient, private logger: Logger) {
     this.logger.info('RateProvider initialized.');

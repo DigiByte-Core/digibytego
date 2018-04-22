@@ -23,11 +23,11 @@ import { AmountPage } from './amount/amount';
 })
 export class SendPage {
   public search: string = '';
-  public walletsAny: any;
+  public wallets: any;
   public walletList: any;
   public contactsList: object[] = [];
   public filteredContactsList: object[] = [];
-  public hasAnyWallets: boolean;
+  public hasWallets: boolean;
   public hasContacts: boolean;
   public contactsShowMore: boolean;
   private CONTACTS_SHOW_LIMIT: number = 10;
@@ -51,8 +51,8 @@ export class SendPage {
   }
 
   ionViewWillEnter() {
-    this.walletsAny = this.profileProvider.getWallets();
-    this.hasAnyWallets = !(_.isEmpty(this.walletsAny));
+    this.wallets = this.profileProvider.getWallets();
+    this.hasWallets = !(_.isEmpty(this.wallets));
 
     this.events.subscribe('finishIncomingDataMenuEvent', (data) => {
       switch (data.redirTo) {
@@ -99,9 +99,9 @@ export class SendPage {
   private updateWalletsList(): void {
     this.walletList = [];
 
-    if (!this.hasAnyWallets) return;
+    if (!this.hasWallets) return;
 
-    _.each(this.walletsAny, (v: any) => {
+    _.each(this.wallets, (v: any) => {
       this.walletList.push({
         color: v.color,
         name: v.name,

@@ -29,9 +29,9 @@
         </ion-label>
         <ion-checkbox [(ngModel)]="terms.accepted"></ion-checkbox>
       </ion-item>
-      <a (click)="openDisclaimer()" translate>Terms of Use</a>
+      <a class="text-white" (click)="openDisclaimer()" translate>Terms of Use</a>
     </div>
-    <button ion-button class="button-standard" [disabled]="!accepted.first || !accepted.second || !terms.accepted" (click)="confirm()">
+    <button ion-button class="button-standard text-white" [disabled]="!accepted.first || !accepted.second || !terms.accepted" (click)="confirm()">
       {{'Confirm &amp; Finish' | translate}}
     </button>
   </div>

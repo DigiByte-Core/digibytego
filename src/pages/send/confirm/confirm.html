@@ -52,7 +52,6 @@
       <span translate>To</span>
 
       <div class="payment-proposal-to" *ngIf="!tx.recipientType">
-        <img class="icon-bitcoin" src="assets/img/icon-bitcoin-small.svg">
         <div class="ellipsis" *ngIf="!tx.paypro" copy-to-clipboard="{{ tx.origToAddress }}">
           <!--TODO: <contact *ngIf="tx.origToAddress && !tx.name" address="{{tx.origToAddress}}"></contact>-->
           <span *ngIf="!tx.name">{{tx.origToAddress}}</span>

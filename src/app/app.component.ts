@@ -151,7 +151,8 @@ export class CopayApp {
 
   private registerIntegrations(): void {
     // DigiID
-    if (this.appProvider.info._enabledExtensions.digiid) this.DigiIDProvider.register();
+    // if (this.appProvider.info._enabledExtensions.digiid) 
+    this.DigiIDProvider.register();
     // ShapeShift
     if (this.appProvider.info._enabledExtensions.shapeshift) this.shapeshiftProvider.register();
   }

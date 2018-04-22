@@ -106,7 +106,7 @@ export class WalletProvider {
 
         lodash.each(txps, (tx: any) => {
 
-          tx = this.txFormatProvider.processTx(wallet.coin, tx);
+          tx = this.txFormatProvider.processTx(tx);
 
           // no future transactions...
           if (tx.createdOn > now)
@@ -648,7 +648,7 @@ export class WalletProvider {
     wallet.hasUnsafeConfirmed = false;
 
     lodash.each(txs, (tx: any) => {
-      tx = this.txFormatProvider.processTx(wallet.coin, tx);
+      tx = this.txFormatProvider.processTx(tx);
 
       // no future transactions...
       if (tx.time > now)
@@ -974,7 +974,7 @@ export class WalletProvider {
       prefs.language = this.languageProvider.getCurrent();
       
       // Set OLD wallet in bits to btc
-      prefs.unit = 'btc'; // DEPRECATED
+      prefs.unit = 'dgb'; // DEPRECATED
 
       updateRemotePreferencesFor(lodash.clone(clients), prefs).then(() => {
         this.logger.debug('Remote preferences saved for' + lodash.map(clients, (x: any) => {

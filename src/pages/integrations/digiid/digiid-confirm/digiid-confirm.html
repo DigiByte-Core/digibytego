@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>DigiID Authentication Request</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="content">
+      <p>Authenticate with Digi-ID to<br>
+      <span class="text-medium">{{address}}</span></p>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <page-slide-to-accept #slideButton *ngIf="isCordova" [buttonText]="confirmText" (slideDone)="approve()"></page-slide-to-accept>
+  <button *ngIf="!isCordova" ion-button full class="button-footer text-white" (click)="approve()" >Confirm</button>
+  <ion-item-divider class="selector-label" *ngIf="wallet">
+    {{'Wallet selected' | translate}}
+  </ion-item-divider>
+  <button ion-item detail-none *ngIf="wallets && wallets[0]" (click)="showWallets()">
+    <ion-icon item-start>
+      <img *ngIf="wallet.network == 'testnet'" [ngStyle]="{'background-color': wallet.color}" src="assets/img/icon-wallet-testnet.svg" class="icon-wallet" />
+      <img *ngIf="wallet.network != 'testnet'" [ngStyle]="{'background-color': wallet.color}" src="assets/img/icon-wallet.svg" class="icon-wallet" />
+    </ion-icon>
+    <div class="item-title">{{wallet.name}}</div>
+    <div class="item-subtitle">
+      <span class="wallet-warning" *ngIf="!wallet.isComplete()" translate>
+        Incomplete
+      </span>
+      <span class="wallet-warning" *ngIf="wallet.isComplete() && wallet.needsBackup" translate>
+        Needs backup
+      </span>
+      <span *ngIf="wallet.isComplete() && !wallet.needsBackup">
+        <span>
+          Ready To be used with Digi-ID
+        </span>
+        <ion-icon ios="ios-timer-outline" md="md-timer"></ion-icon>
+      </span>
+    </div>
+    <div item-end>
+      <button ion-button clear color="grey" icon-only>
+        <ion-icon *ngIf="!isOpenSelector" name="ios-arrow-down-outline"></ion-icon>
+        <ion-icon *ngIf="isOpenSelector" name="ios-arrow-up-outline"></ion-icon>
+      </button>
+    </div>
+  </button>
+</ion-footer>

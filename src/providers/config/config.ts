@@ -52,6 +52,7 @@ interface Config {
   };
 
   showIntegration: {
+    digiid: boolean,
     shapeshift: boolean
   };
 
@@ -129,10 +130,11 @@ const configDefault: Config = {
   },
 
   showIntegration: {
+    digiid: true,
     shapeshift: true
   },
 
-  rates: 'https://insight.bitpay.com:443/api/rates',
+  rates: 'https://digibyte.io/rates',
 
   release: 'https://api.github.com/repos/digibyte/digibytego/releases/latest',
 
@@ -176,11 +178,12 @@ export class ConfigProvider {
           this.configCache = _.clone(configDefault);
         }
         resolve();
-      }).catch((err) => {
-        this.logger.error(err);
-        reject();
+      }).catch(err => {
+        this.logger.error('Error Loading Config. Using Defaults ', err);
+        this.configCache = _.clone(configDefault);
+        resolve();
       });
-    });
+    })
   }
 
   /**

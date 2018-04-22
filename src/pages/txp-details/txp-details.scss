@@ -168,5 +168,21 @@ page-txp-details {
       }
     }
   }
+  .last-item{
+    margin-left: auto !important;
+    margin-right: 0px !important;
+  }
+  .output-info{
+    color: color($colors, dark);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    &.output-note{
+      color: color($colors, grey);
+    }
+  }
+  .proposal-container {
+    border-left: 2px solid #ff9900;
+  }
 }
 

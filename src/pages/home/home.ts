@@ -238,6 +238,7 @@ export class HomePage {
 
   private setWallets = _.debounce(() => {
     this.wallets = this.profileProvider.getWallets();
+    this.walletsAll = this.profileProvider.getWallets();
     this.updateAllWallets();
   }, 5000, {
       'leading': true
@@ -328,7 +329,7 @@ export class HomePage {
 
   private updateAllWallets(): void {
     let wallets: any[] = [];
-    let foundMessage = false
+    let foundMessage = false;
 
     _.each(this.walletsAll, (wBtc) => {
       wallets.push(wBtc);
@@ -435,10 +436,10 @@ export class HomePage {
   }
 
   public reorderWallets(indexes): void {
-    let element = this.wallets[indexes.from];
-    this.wallets.splice(indexes.from, 1);
-    this.wallets.splice(indexes.to, 0, element);
-    _.each(this.wallets, (wallet: any, index: number) => {
+    let element = this.walletsAll[indexes.from];
+    this.walletsAll.splice(indexes.from, 1);
+    this.walletsAll.splice(indexes.to, 0, element);
+    _.each(this.walletsAll, (wallet: any, index: number) => {
       this.profileProvider.setWalletOrder(wallet.id, index);
     });
   };

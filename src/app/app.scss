@@ -46,18 +46,21 @@ ion-alert.alert-top {
   font-size: 1.6rem;
 }
 
+.text-white {
+  color: #fff !important;
+}
+
 // Hide border when refresh
 .has-refresher > .scroll-content {
   border-top: none !important;
-  background-image: linear-gradient(
-    to bottom,
-    $toolbar-background,
-    $toolbar-background 50%,
-    $background-color 50%,
-    $background-color 50%,
-    $background-color 50%
-  );
 }
+
+.scroll-content {
+  .wrapper {
+    background-color: $background-color;
+  }
+}
+
 ion-spinner * {
   stroke: color($colors, light);
 }

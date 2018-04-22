@@ -2,7 +2,7 @@
 
   <ion-navbar>
     <ion-buttons end>
-      <button ion-button class="primary-color" (click)="createDefaultWallet()" *ngIf="currentIndex == 0">
+      <button ion-button class="text-whiter" (click)="createDefaultWallet()" *ngIf="currentIndex == 0">
         {{'Skip' | translate}}
       </button>
     </ion-buttons>
@@ -18,7 +18,7 @@
       <img src='assets/img/app/onboarding/tour-phone.svg' />
       <div class="bottom-absolute">
         <p translate class="bottom-description">Just scan the code to pay.</p>
-        <button ion-button clear class="button-standard btn-transparent primary-color e2e-got-it" (click)="slideNext()">
+        <button ion-button clear class="button-standard text-white btn-transparent e2e-got-it" (click)="slideNext()">
           {{'Got it' | translate}}
         </button>
       </div>
@@ -30,10 +30,10 @@
       <div class="ticker-container">
         <div class="ticker">1 DGB = {{localCurrencySymbol}}{{localCurrencyPerBtc}}</div>
       </div>
-      <img src='assets/img/app/onboarding/tour-currency.svg' />
+      <img class="ticker-img" src='assets/img/app/onboarding/tour-currency.svg' />
       <div class="bottom-absolute">
         <p translate class="bottom-description">The exchange rate changes with the market.</p>
-        <button ion-button clear class="button-standard btn-transparent primary-color e2e-makes-sense" (click)="slideNext()">
+        <button ion-button clear class="button-standard text-white btn-transparent text-white e2e-makes-sense" (click)="slideNext()">
           {{'Makes sense' | translate}}
         </button>
       </div>
@@ -45,7 +45,7 @@
       <img src='assets/img/app/onboarding/tour-control.svg' />
       <div class="bottom-absolute">
         <p translate class="bottom-description">Not even the developers can access it.</p>
-        <button ion-button class="button-standard e2e-create-wallet" (click)="createDefaultWallet()">
+        <button ion-button class="button-standard text-white e2e-create-wallet" (click)="createDefaultWallet()">
           {{'Create digibyte wallet' | translate}}
         </button>
       </div>

@@ -16,6 +16,7 @@ import { ImportWalletPage } from '../../pages/add/import-wallet/import-wallet';
 import { JoinWalletPage } from '../../pages/add/join-wallet/join-wallet';
 import { AmountPage } from '../../pages/send/amount/amount';
 import { ConfirmPage } from '../../pages/send/confirm/confirm';
+import { DigiidConfirmPage } from '../../pages/integrations/digiid/digiid-confirm/digiid-confirm';
 
 @Injectable()
 export class IncomingDataProvider {
@@ -95,9 +96,7 @@ export class IncomingDataProvider {
         this.goToAmountPage(data);
       }
     } else if (/^digiid?:\/\//.test(data)) {
-      this.digiidProvider.setAddress(data);
-      this.digiidProvider.signMessage()
-      .then(msg => this.digiidProvider.authorize(msg));
+      this.goAuth(data);
     } else if (data && data.indexOf(this.appProvider.info.name + '://') === 0) {
 
       // Disable BitPay Card
@@ -181,6 +180,12 @@ export class IncomingDataProvider {
       return false;
     }
     return true;
+  }
+
+  private goAuth(uri: string): void {
+    this.navCtrl.push(DigiidConfirmPage, {
+      uri,
+    });    
   }
 
   private goSend(addr: string, amount: string, message: string): void {

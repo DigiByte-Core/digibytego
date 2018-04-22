@@ -75,7 +75,6 @@
     <ion-item *ngIf="btx.action === 'sent'" class="container-to">
       <span translate>To</span>
       <div class="payment-to">
-        <img class="icon-bitcoin" *ngIf="!cardId" src="assets/img/icon-bitcoin-small.svg">
         <img class="icon-bitcoin" *ngIf="cardId" src="assets/img/icon-card.svg" width="34">
         <div copy-to-clipboard="{{ btx.outputs[0].address }}">
           <span class="contact" *ngIf="!toName">{{ btx.outputs[0].address }}"</span>

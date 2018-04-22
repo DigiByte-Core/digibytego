@@ -13,6 +13,7 @@ import { HomeIntegrationsProvider } from '../home-integrations/home-integrations
 import { PersistenceProvider } from '../persistence/persistence';
 import { ProfileProvider } from '../profile/profile';
 
+
 @Injectable()
 export class DigiIDProvider {
 
@@ -21,6 +22,7 @@ export class DigiIDProvider {
   private _address: any;
   private MAGIC_BYTES: any;
   private credentials: any;
+  private wallet: any;
 
   constructor(
     private appProvider: AppProvider,
@@ -99,7 +101,8 @@ export class DigiIDProvider {
     return ecdsa.sig;
   }
 
-  public setAddress(href): void {
+  public setup(href: string, wallet): void {
+    this.wallet = wallet;
     this._address = href;
     this._parseURI();
   }
@@ -111,6 +114,13 @@ export class DigiIDProvider {
   public getSiteAddress(): string {
     const protocol = (this._parsed.unsecure != '') ? 'http://' : 'https://';
     return protocol + this._parsed.host;
+  }
+
+  public getDGBAddress(walletId: string): string {
+    const wallet = this.profileProvider.getWallet(walletId);
+    const xpriv = wallet.credentials.xPrivKey;
+    const hdPrivateKey = this.bitcore.HDPrivateKey(xpriv);
+    return 'str';
   }
 
   public generateSignatureMessage(hdPrivateKey): Promise<object> {
@@ -150,8 +160,7 @@ export class DigiIDProvider {
 
   public signMessage(): Promise<object> {
     return new Promise((resolve, reject) => {
-      const wallets = this.profileProvider.getWallets();
-      const xpriv = wallets[0].credentials.xPrivKey;
+      const xpriv = this.wallet.credentials.xPrivKey;
       var hdPrivateKey = this.bitcore.HDPrivateKey(xpriv);
       this.generateSignatureMessage(hdPrivateKey)
         .then(msg => {
@@ -160,7 +169,7 @@ export class DigiIDProvider {
       });
   }
 
-  public authorize(msg): Promise<void> {
+  public authorize(msg): any {
     return new Promise((resolve, reject) => {
       let localHistory;
       const obj = {
@@ -170,25 +179,25 @@ export class DigiIDProvider {
         success: false,
         time: Math.floor(Date.now() / 1000)
       };
-      const wallets = this.profileProvider.getWallets();
-      this.persistenceProvider.getDigiIdHistory(wallets[0].id)
+      return this.persistenceProvider.getDigiIdHistory(this.wallet.id)
         .then((history: any) => {
           localHistory = history || [];
-          return this.http.post(this._getCallBackURL(), msg)
+          return this.http.post(this._getCallBackURL(), msg).toPromise();
         })
-        .then(values => {
+        .then(resp => {
+          this.logger.info("SUCCESS: Digi-ID Authed");
           obj.success = true;
           localHistory.unshift(obj);
-          this.logger.info("SUCCESS: Feedback sent");
-          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, localHistory);
+          return resolve(localHistory);
         })
-        .catch(err => {
+        .catch(data => {
+          this.logger.error('Digi-ID Auth Error: ' + data.error.message);
           localHistory.unshift(obj);
-          this.logger.info("ERROR: Feedback sent anyway.");
-          return this.persistenceProvider.setDigiIdHistory(wallets[0].id, localHistory).then(() => reject());
+          reject({ localHistory, error: data.error.message})
         });
     });
   }
+
 
   public register(): void {
     this.homeIntegrationsProvider.register({

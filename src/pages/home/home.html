@@ -11,7 +11,13 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <div class="wrapper">
-    <div class="header-extend"></div>
+    <div class="header-extend">
+      <div *ngIf="!wallets || !wallets[0]" class="no-wallets">
+        <button ion-button clear (click)="goToAddView()">
+          <span translate>Create a new wallet</span>
+        </button>
+      </div>
+    </div>
 
     <ion-card *ngIf="serverMessage">
       <ion-item>
@@ -40,7 +46,7 @@
     <page-feedback-card *ngIf="showRateCard">
     </page-feedback-card>
 
-    <ion-card *ngIf="homeTip">
+    <ion-card *ngIf="homeTip && wallets && wallets[0]">
       <ion-card-header>
         <ion-row>
           <ion-col text-right (click)="hideHomeTip()">
@@ -95,13 +101,7 @@
       </ion-list>
     </div>
 
-    <div *ngIf="!wallets || !wallets[0]" class="no-wallets">
-      <button ion-button clear (click)="goToAddView()">
-        <span translate>Create a new wallet</span>
-      </button>
-    </div>
-
-    <div class="card" *ngIf="wallets && wallets[0]">
+    <div class="card" *ngIf="walletsAll && walletsAll[0]">
       <ion-item-divider>
         <div class="title" item-start>
           <img src="assets/img/icon-digibyte.svg" alt="DigiByte Wallets" width="18" />
@@ -111,7 +111,7 @@
           <button ion-button clear icon-only color="grey" (click)="goToAddView()">
             <ion-icon name="add"></ion-icon>
           </button>
-          <button ion-button clear icon-only color="grey" (click)="reorder()" *ngIf="wallets.length > 1">
+          <button ion-button clear icon-only color="grey" (click)="reorder()" *ngIf="walletsAll.length > 1">
             <ion-icon name="reorder"></ion-icon>
           </button>
         </div>
@@ -152,7 +152,7 @@
       </ion-list>
     </div>
 
-    <div class="card" *ngIf="homeIntegrations && homeIntegrations.length>0 && wallets &&wallets[0]">
+    <div class="card" *ngIf="homeIntegrations && homeIntegrations.length>0">
       <ion-item-divider (click)="hideHomeIntegrations = !hideHomeIntegrations">
         <div class="title" item-start translate>Services</div>
         <div item-end>

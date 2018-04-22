@@ -16,7 +16,10 @@ export class DigiidPage {
 
   public shifts: any;
   public history: any;
+  public wallet: any;
   public wallets: any;
+  public address: string;
+  public isOpenSelector: boolean;
 
   constructor(
     private events: Events,
@@ -25,19 +28,43 @@ export class DigiidPage {
     private persistenceProvider: PersistenceProvider,
     private profileProvider: ProfileProvider
   ) {
-    this.shifts = { data: {} };
+    this.isOpenSelector = false;
+  }
+
+  ionViewWillEnter() {
     this.wallets = this.profileProvider.getWallets();
-    this.persistenceProvider.getDigiIdHistory(this.wallets[0].id)
+    this.onWalletSelect(this.checkSelectedWallet(this.wallet, this.wallets));
+    this.persistenceProvider.getDigiIdHistory(this.wallet.id)
      .then(history => {
        this.history = history;
      });
   }
 
-  ionViewDidLoad() {
-    this.logger.info('ionViewDidLoad DigiID Page');
-    // this.digiidProvider.setAddress('digiid://digiid.digibyteprojects.com/callback?x=fd40d7a087105eeb');
-    // this.digiidProvider.signMessage()
-    //  .then(msg => this.digiidProvider.authorize(msg));
+  private onWalletSelect(wallet: any): any {
+    this.wallet = wallet;
+    this.persistenceProvider.getDigiIdHistory(this.wallet.id)
+     .then(history => {
+       this.history = history;
+     });
   }
 
+  private checkSelectedWallet(wallet: any, wallets: any): any {
+    if (!wallet) return wallets[0];
+    let w = _.find(wallets, (w: any) => {
+      return w.id == wallet.id;
+    });
+    if (!w) return wallets[0];
+    return wallet;
+  }
+
+  public showWallets(): void {
+    this.isOpenSelector = true;
+    let id = this.wallet ? this.wallet.credentials.walletId : null;
+    this.events.publish('showWalletsSelectorEvent', this.wallets, id);
+    this.events.subscribe('selectWalletEvent', (wallet: any) => {
+      if (!_.isEmpty(wallet)) this.onWalletSelect(wallet);
+      this.events.unsubscribe('selectWalletEvent');
+      this.isOpenSelector = false;
+    });
+  }
 }
