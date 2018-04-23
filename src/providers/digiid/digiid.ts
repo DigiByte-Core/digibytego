@@ -189,6 +189,9 @@ export class DigiIDProvider {
       return this.persistenceProvider.getDigiIdHistory(this.wallet.id)
         .then((history: any) => {
           localHistory = history || [];
+          if(localHistory.length > 10) {
+            localHistory.pop();
+          }
           return this.http.post(this._getCallBackURL(), msg).toPromise();
         })
         .then(resp => {
