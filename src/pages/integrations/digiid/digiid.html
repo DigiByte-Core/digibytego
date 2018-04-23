@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <ion-list *ngIf="history && history[0]" class="tx-history">
+  <ion-list *ngIf="history && history[0]" class="auth-history">
     <div *ngFor="let auth of history; trackBy: trackByFn; let i = index">
 
       <button ion-item >
