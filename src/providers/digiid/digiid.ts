@@ -209,7 +209,7 @@ export class DigiIDProvider {
   public register(): void {
     this.homeIntegrationsProvider.register({
       name: 'digiid',
-      title: 'DigiID',
+      title: 'Digi-ID',
       icon: 'assets/img/icon-digiid.svg',
       page: 'DigiidPage',
       show: true
