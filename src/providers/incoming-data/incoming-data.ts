@@ -14,9 +14,9 @@ import { ScanProvider } from '../scan/scan';
 // pages
 import { ImportWalletPage } from '../../pages/add/import-wallet/import-wallet';
 import { JoinWalletPage } from '../../pages/add/join-wallet/join-wallet';
+import { DigiidConfirmPage } from '../../pages/integrations/digiid/digiid-confirm/digiid-confirm';
 import { AmountPage } from '../../pages/send/amount/amount';
 import { ConfirmPage } from '../../pages/send/confirm/confirm';
-import { DigiidConfirmPage } from '../../pages/integrations/digiid/digiid-confirm/digiid-confirm';
 
 @Injectable()
 export class IncomingDataProvider {

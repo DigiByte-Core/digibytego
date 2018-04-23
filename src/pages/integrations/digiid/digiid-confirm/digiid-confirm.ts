@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import { Events, ModalController, NavController, NavParams } from 'ionic-angular';
+import { Events, ModalController, NavController, NavParams, ViewController } from 'ionic-angular';
 import * as _ from 'lodash';
 
 // Providers
+import { DigiIDProvider } from '../../../../providers/digiid/digiid';
 import { PersistenceProvider } from '../../../../providers/persistence/persistence';
 import { ProfileProvider } from '../../../../providers/profile/profile';
-import { DigiIDProvider } from '../../../../providers/digiid/digiid';
 
 // Pages
 import { DigiidPage } from '../digiid';
 import { DigiidFailurePage } from '../digiid-failure/digiid-failure';
 import { DigiidSuccessPage } from '../digiid-success/digiid-success';
+import { HomePage } from '../../../home/home';
+import { TabsPage } from '../../../tabs/tabs';
 
 @Component({
   selector: 'page-digiid-confirm',
@@ -33,6 +35,7 @@ export class DigiidConfirmPage {
     private navParams: NavParams,
     private persistenceProvider: PersistenceProvider,
     private profileProvider: ProfileProvider,
+    private viewCtrl: ViewController,
   ) {
     this.isOpenSelector = false;
     this.confirmText = 'Slide to confirm';
@@ -80,7 +83,9 @@ export class DigiidConfirmPage {
           let modal = this.modalCtrl.create(DigiidSuccessPage, { }, { showBackdrop: true, enableBackdropDismiss: false });
           modal.present();
           modal.onDidDismiss(() => {
-            this.navCtrl.push(DigiidPage);
+            this.navCtrl.popToRoot().then(() => {
+              this.navCtrl.parent.select(0);
+            });
           });
         })
       .catch(err => {
@@ -89,7 +94,9 @@ export class DigiidConfirmPage {
           let modal = this.modalCtrl.create(DigiidFailurePage, { error: err.error }, { showBackdrop: true, enableBackdropDismiss: false });
           modal.present();
           modal.onDidDismiss(() => {
-            this.navCtrl.push(DigiidPage);
+            this.navCtrl.popToRoot().then(() => {
+              this.navCtrl.parent.select(0);
+            });
           }); 
         });
       });
