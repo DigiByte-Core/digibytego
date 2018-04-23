@@ -19,7 +19,6 @@ export class DigiidDetailsPage {
     private navCtrl: NavController,
     private navParams: NavParams,
   ) {
-    this.title = '';
   }
 
   ionViewWillEnter() {
