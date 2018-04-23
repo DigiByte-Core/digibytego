@@ -14,8 +14,8 @@
 </ion-content>
 
 <ion-footer>
-  <page-slide-to-accept #slideButton *ngIf="isCordova" [buttonText]="confirmText" (slideDone)="approve()"></page-slide-to-accept>
-  <button *ngIf="!isCordova" ion-button full class="button-footer text-white" (click)="approve()" >Confirm</button>
+  <page-slide-to-accept #slideButton *ngIf="isCordova" [buttonText]="confirmText" [disabled]="loading || !wallet" (slideDone)="approve()"></page-slide-to-accept>
+  <button *ngIf="!isCordova" ion-button full class="button-footer text-white" [disabled]="loading || !wallet" (click)="approve()" >{{confirmText}}</button>
   <ion-item-divider class="selector-label" *ngIf="wallet">
     {{'Wallet selected' | translate}}
   </ion-item-divider>

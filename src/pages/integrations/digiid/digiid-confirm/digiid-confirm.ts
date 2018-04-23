@@ -23,6 +23,7 @@ export class DigiidConfirmPage {
   public address: string;
   public confirmText: string;
   public isOpenSelector: boolean;
+  public loading: boolean;
   public uri: string;
   public wallet: any;
   public wallets: any;
@@ -38,7 +39,8 @@ export class DigiidConfirmPage {
     private viewCtrl: ViewController,
   ) {
     this.isOpenSelector = false;
-    this.confirmText = 'Slide to confirm';
+    this.confirmText = 'Confirm';
+    this.loading = false;
   }
 
   ionViewWillEnter() {
@@ -74,6 +76,8 @@ export class DigiidConfirmPage {
 
   public approve() {
     return new Promise((resolve, reject) => {
+      this.confirmText = 'Authenticating...';
+      this.loading = true;
       this.digiidProvider.signMessage()
         .then(msg => this.digiidProvider.authorize(msg))
         .then(localHistory => {
@@ -83,6 +87,7 @@ export class DigiidConfirmPage {
           let modal = this.modalCtrl.create(DigiidSuccessPage, { }, { showBackdrop: true, enableBackdropDismiss: false });
           modal.present();
           modal.onDidDismiss(() => {
+            this.loading = false;
             this.navCtrl.popToRoot().then(() => {
               this.navCtrl.parent.select(0);
             });
@@ -91,6 +96,7 @@ export class DigiidConfirmPage {
       .catch(err => {
         return this.persistenceProvider.setDigiIdHistory(this.wallet.id, err.localHistory)
         .then(() => {
+          this.loading = false;
           let modal = this.modalCtrl.create(DigiidFailurePage, { error: err.error }, { showBackdrop: true, enableBackdropDismiss: false });
           modal.present();
           modal.onDidDismiss(() => {
