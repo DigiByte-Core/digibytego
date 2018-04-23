@@ -184,7 +184,8 @@ export class DigiIDProvider {
         uri: msg.uri,
         address: msg.address,
         success: false,
-        time: Math.floor(Date.now() / 1000)
+        time: Math.floor(Date.now() / 1000),
+        error: null
       };
       return this.persistenceProvider.getDigiIdHistory(this.wallet.id)
         .then((history: any) => {
@@ -201,9 +202,11 @@ export class DigiIDProvider {
           return resolve(localHistory);
         })
         .catch(data => {
-          this.logger.error('Digi-ID Auth Error: ' + data.error.message);
+          if (data.error.message) {
+            obj.error = data.error.message;
+          }
           localHistory.unshift(obj);
-          reject({ localHistory, error: data.error.message})
+          reject({ localHistory, error: obj.error})
         });
     });
   }
