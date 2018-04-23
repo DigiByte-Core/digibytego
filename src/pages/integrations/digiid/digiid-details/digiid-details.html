@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <ion-list *ngIf="authDetails">
+    <ion-item>
+      <div class="header-container">
+        <div class="sending-label">
+          <img class="sending-img" src="assets/img/success.svg" width="40" *ngIf="authDetails.success">
+          <img class="sending-img" src="assets/img/cancel.svg" width="40" *ngIf="!authDetails.success">
+          <span *ngIf="authDetails.success">Success</span>
+          <span *ngIf="!authDetails.success">Failed</span>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item-divider></ion-item-divider>
+
+    <ion-item class="container-to">
+      <span>URI</span>
+      <div class="payment-to">
+        <div copy-to-clipboard="{{ authDetails.uri }}">
+          <span class="contact">{{ authDetails.uri }}</span>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>Address</span>
+      <div class="payment-to">
+        <div copy-to-clipboard="{{ authDetails.address }}">
+          <span class="contact">{{ authDetails.address }}</span>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>Hostname</span>
+      <div class="payment-to">
+        <div copy-to-clipboard="{{ uri.hostname }}">
+          <span class="contact">{{ uri.hostname }}</span>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>Secure</span>
+      <div class="payment-to">
+        <div>
+          <span class="contact" *ngIf="uri.unsecure">false</span>
+          <span class="contact" *ngIf="!uri.unsecure">true</span>
+        </div>
+      </div> 
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>Path</span>
+      <div class="payment-to">
+        <div copy-to-clipboard="{{ uri.pathname }}">
+          <span class="contact">{{ uri.pathname }}</span>
+        </div>
+      </div> 
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>Nonce</span>
+      <div class="payment-to">
+        <div copy-to-clipboard="{{ uri.nonce }}">
+          <span class="contact">{{ uri.nonce }}</span>
+        </div>
+      </div> 
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>Wallet</span>
+      <div class="payment-to">
+        <div copy-to-clipboard="{{ walletId }}">
+          <span class="contact">{{ walletId }}</span>
+        </div>
+      </div> 
+    </ion-item>
+
+    <ion-item class="container-to">
+      <span>{{'Date' | translate}}</span>
+      <div class="payment-to">
+        <div>
+            <time class="contact">{{ authDetails.time * 1000 | amDateFormat:'MM/DD/YYYY hh:mm a'}}</time>
+        </div>
+      </div> 
+    </ion-item>
+
+
+  </ion-list>
+
+</ion-content>

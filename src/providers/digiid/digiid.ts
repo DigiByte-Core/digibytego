@@ -101,6 +101,12 @@ export class DigiIDProvider {
     return ecdsa.sig;
   }
 
+  public passURI(uri: string): string {
+    this._address = uri;
+    this._parseURI();
+    return this._parsed;
+  }
+
   public setup(href: string, wallet): void {
     this.wallet = wallet;
     this._address = href;

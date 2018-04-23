@@ -8,7 +8,7 @@
   <ion-list *ngIf="history && history[0]" class="auth-history">
     <div *ngFor="let auth of history; trackBy: trackByFn; let i = index">
 
-      <button ion-item >
+      <button ion-item  (click)="goToAuthDetails(auth)">
         <ion-icon item-start>
           <div *ngIf="auth.success">
             <span>

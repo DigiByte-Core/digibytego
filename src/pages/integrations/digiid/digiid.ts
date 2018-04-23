@@ -7,6 +7,8 @@ import { DigiIDProvider } from '../../../providers/digiid/digiid';
 import { PersistenceProvider } from '../../../providers/persistence/persistence';
 import { ProfileProvider } from '../../../providers/profile/profile';
 
+// Pages
+import { DigiidDetailsPage } from './digiid-details/digiid-details';
 
 @Component({
   selector: 'page-digiid',
@@ -25,6 +27,7 @@ export class DigiidPage {
     private events: Events,
     private logger: Logger,
     private digiidProvider: DigiIDProvider,
+    private navCtrl: NavController,
     private persistenceProvider: PersistenceProvider,
     private profileProvider: ProfileProvider
   ) {
@@ -70,5 +73,9 @@ export class DigiidPage {
 
   public getURL(uri): string {
     return this.digiidProvider.getSiteAddress(uri);
+  }
+
+  public goToAuthDetails(authRequest: any) {
+    this.navCtrl.push(DigiidDetailsPage, { walletId: this.wallet.credentials.walletId, authDetails: authRequest });
   }
 }

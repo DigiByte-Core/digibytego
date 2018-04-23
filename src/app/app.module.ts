@@ -62,6 +62,7 @@ import { WalletDetailsPage } from '../pages/wallet-details/wallet-details';
 // Integrations: DigiID
 import { DigiidPage } from '../pages/integrations/digiid/digiid';
 import { DigiidConfirmPage } from '../pages/integrations/digiid/digiid-confirm/digiid-confirm';
+import { DigiidDetailsPage } from '../pages/integrations/digiid/digiid-details/digiid-details';
 import { DigiidFailurePage } from '../pages/integrations/digiid/digiid-failure/digiid-failure';
 import { DigiidSettingsPage } from '../pages/integrations/digiid/digiid-settings/digiid-settings';
 import { DigiidSuccessPage } from '../pages/integrations/digiid/digiid-success/digiid-success';
@@ -244,6 +245,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     DigiidPage,
     DigiidConfirmPage,
+    DigiidDetailsPage,
     DigiidFailurePage,
     DigiidSettingsPage,
     DigiidSuccessPage,
@@ -365,6 +367,7 @@ export function createTranslateLoader(http: HttpClient) {
     SettingsPage,
     DigiidPage,
     DigiidConfirmPage,
+    DigiidDetailsPage,
     DigiidFailurePage,
     DigiidSettingsPage,
     DigiidSuccessPage,
