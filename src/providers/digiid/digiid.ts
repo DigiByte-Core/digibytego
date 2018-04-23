@@ -111,7 +111,11 @@ export class DigiIDProvider {
     return this._parsed.protocol + ":" + this._parsed.host + this._parsed.pathname;
   }
 
-  public getSiteAddress(): string {
+  public getSiteAddress(uri = null): string {
+    if (uri) {
+      this._address = uri;
+      this._parseURI();     
+    }
     const protocol = (this._parsed.unsecure != '') ? 'http://' : 'https://';
     return protocol + this._parsed.host;
   }
@@ -178,7 +182,6 @@ export class DigiIDProvider {
       let localHistory;
       const obj = {
         uri: msg.uri,
-        host: this._parsed.host,
         address: msg.address,
         success: false,
         time: Math.floor(Date.now() / 1000)

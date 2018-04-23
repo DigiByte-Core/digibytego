@@ -67,4 +67,8 @@ export class DigiidPage {
       this.isOpenSelector = false;
     });
   }
+
+  public getURL(uri): string {
+    return this.digiidProvider.getSiteAddress(uri);
+  }
 }

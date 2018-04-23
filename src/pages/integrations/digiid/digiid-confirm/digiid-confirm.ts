@@ -8,11 +8,11 @@ import { PersistenceProvider } from '../../../../providers/persistence/persisten
 import { ProfileProvider } from '../../../../providers/profile/profile';
 
 // Pages
-import { DigiidPage } from '../digiid';
-import { DigiidFailurePage } from '../digiid-failure/digiid-failure';
 import { DigiidSuccessPage } from '../digiid-success/digiid-success';
 import { HomePage } from '../../../home/home';
 import { TabsPage } from '../../../tabs/tabs';
+import { DigiidPage } from '../digiid';
+import { DigiidFailurePage } from '../digiid-failure/digiid-failure';
 
 @Component({
   selector: 'page-digiid-confirm',
