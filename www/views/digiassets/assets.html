@@ -5,8 +5,8 @@
     <ion-nav-back-button style="display: block">
     </ion-nav-back-button>
     <ion-nav-buttons side="secondary">
-        <button class="button back-button" ng-click="openIssueModal()">
-          Issue
+        <button class="button back-button" ng-click="getAssets()">
+          Refresh
         </button>
       </ion-nav-buttons>
   </ion-nav-bar>
@@ -50,8 +50,11 @@
                 </div>
             </div>
         </div>
-        <div class="cc-api-error" ng-show="!assets">
-            <a translate ng-click="getAssets()">Refresh</a>
+        <div class="issue-assets-btn">
+            <button ng-click="openIssueModal()" class="button black expand round size-12 text-spacing"
+                style="width: 100%; background-color: #0066cc; color: #fff;font-size: 1.2em;" translate>
+                Issue New Asset
+            </button>
         </div>
         <div class="cc-api-error" ng-show="error">
             <h3 translate>Error connecting to ColoredCoins</h3>
