@@ -22,6 +22,7 @@
       <div ng-show="btx.action == 'received'" class="ellipsis">
         <div ng-if="btx.note.body" class="wallet-details__tx-message ellipsis">{{btx.note.body}}</div>
         <div ng-if="!btx.note.body" class="wallet-details__tx-message ellipsis" translate>Received</div>
+        <span ng-if="btx.isAsset"> asset</span>
         <div class="low-fees" ng-if="btx.lowFees">
           <i class="icon"><img src="img/icon-warning.png" width="20px"></i>
           <span class="comment" translate>Low fees</span>
@@ -30,7 +31,11 @@
           <i class="icon"><img src="img/icon-warning.png" width="20px"></i>
           <span class="comment" translate>Amount too low to spend</span>
         </div>
- 
+        <span ng-show="btx.isAsset && btx.isAsset.action == 'issue'">
+          <span class="ellipsis">
+            Issued asset
+          </span>
+        </span> 
       </div>
 
       <div ng-show="btx.action == 'sent'" class="ellipsis">
@@ -40,12 +45,18 @@
           {{addressbook[btx.addressTo].name || addressbook[btx.addressTo]}}
         </div>
         <div ng-if="!btx.message && !btx.note.body && !addressbook[btx.addressTo]" translate>Sent</div>
+        <span ng-if="btx.isAsset"> asset</span></span>
       </div>
 
-      <div ng-show="btx.action == 'moved'" class="ellipsis">
+      <div ng-show="btx.action == 'moved' && !(btx.isAsset && btx.isAsset.action == 'issue')" class="ellipsis">
         <div ng-if="btx.note.body" class="wallet-details__tx-message ellipsis">{{btx.note.body}}</div>
         <div ng-if="!btx.note.body" class="wallet-details__tx-message ellipsis" translate>Moved</div>
+        <span ng-if="btx.isAsset"> asset</span>
       </div>
+      <div class="ellipsis size-12 text-gray" ng-if="btx.isAsset">
+          {{btx.isAsset.assetName}}
+      </div>
+
       <span class="label tu warning radius" ng-if="btx.action == 'invalid'" translate>Invalid</span>
     </div>
 
@@ -64,7 +75,10 @@
         <span  class="size-12" ng-if="btx.action == 'invalid'" translate>
         (possible double spend)
         </span>
-        <span  ng-if="btx.action != 'invalid'">
+        <div ng-if="btx.isAsset">
+            {{btx.assetAmountStr}}
+         </div>
+        <span  ng-if="btx.action != 'invalid' && !btx.isAsset">
         {{btx.amountStr}}
         </span>
       </span>

@@ -49,7 +49,7 @@ angular.module('copayApp.services').factory('configService', function(storageSer
         unitName: 'DGB',
         unitToSatoshi: 100000000,
         unitDecimals: 8,
-        unitCode: 'btc',
+        unitCode: 'dgb',
         alternativeName: 'US Dollar',
         alternativeIsoCode: 'USD',
       }
@@ -71,7 +71,7 @@ angular.module('copayApp.services').factory('configService', function(storageSer
     },
 
     rates: {
-      url: 'http://pettys.website/rates.php',
+      url: 'https://digibyte.io/rates.php',
     },
 
     release: {

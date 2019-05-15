@@ -14,7 +14,7 @@ angular.module('copayApp.controllers').controller('preferencesUnitController', f
     shortName: 'DGB',
     value: 100000000,
     decimals: 8,
-    code: 'btc',
+    code: 'dgb',
   }];
 
   $scope.save = function(newUnit) {

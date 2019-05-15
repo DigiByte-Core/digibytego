@@ -131,6 +131,27 @@ angular.module('copayApp.directives')
       };
     }
   ])
+  .directive('logo', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        width: "@",
+        negative: "="
+      },
+      controller: function($scope) {
+        $scope.logo_url = $scope.negative ? 'img/logo-negative.svg' : 'img/logo.svg';
+      },
+      replace: true,
+      template: '<img ng-src="{{ logo_url }}" alt="Copay">'
+    }
+  })
+  .directive('availableBalance', function() {
+    return {
+      restrict: 'E',
+      replace: true,
+      templateUrl: 'views/includes/available-balance.html'
+    }
+  })
   .directive('ignoreMouseWheel', function($rootScope, $timeout) {
     return {
       restrict: 'A',

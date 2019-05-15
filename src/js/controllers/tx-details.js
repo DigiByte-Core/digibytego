@@ -99,7 +99,6 @@ angular.module('copayApp.controllers').controller('txDetailsController', functio
         $ionicHistory.goBack();
         return popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Transaction not available at this time'));
       }
-
       $scope.btx = txFormatService.processTx(tx);
       txFormatService.formatAlternativeStr(tx.fees, function(v) {
         $scope.btx.feeFiatStr = v;

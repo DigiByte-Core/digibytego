@@ -177,6 +177,7 @@ angular.module('copayApp.controllers').controller('walletDetailsController', fun
         feeLevels: levels,
       }, function(err, txHistory) {
         $scope.updatingTxHistory = false;
+        $rootScope.$emit('Local/BalanceUpdated', $scope.wallet);
         if (err) {
           $scope.txHistory = null;
           $scope.updateTxHistoryError = true;
@@ -252,6 +253,12 @@ angular.module('copayApp.controllers').controller('walletDetailsController', fun
   $scope.updateAll = function(force, cb)  {
     updateStatus(force);
     updateTxHistory(cb);
+  };
+
+  $scope.showAssets = function() {
+    $state.go('assets/', {
+      walletId: $scope.walletId
+    });
   };
 
   $scope.hideToggle = function() {

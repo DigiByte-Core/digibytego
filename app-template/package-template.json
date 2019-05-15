@@ -56,7 +56,7 @@
     "bezier-easing": "^2.0.3",
     "bhttp": "^1.2.1",
     "bitauth": "^0.2.1",
-    "bitcore-wallet-client": "git://github.com/digibyte/bitcore-wallet-client.git#9879f23307383a2aee7f7637f0165f08c01a51bc",
+    "digibytejs-wallet-client": "git://github.com/digibyte-core/digibytejs-wallet-client.git#2f862828ada5b93e6e597dc07b48e686b3211407",
     "bower": "^1.7.9",
     "cordova-android": "5.1.1",
     "cordova-custom-config": "^3.0.5",

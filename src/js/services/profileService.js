@@ -18,7 +18,7 @@ angular.module('copayApp.services')
 
     Object.defineProperty(root, "focusedClient", {
       get: function() {
-        throw "focusedClient is not used any more"
+        //throw "focusedClient is not used any more"
       },
       set: function() {
         throw "focusedClient is not used any more"

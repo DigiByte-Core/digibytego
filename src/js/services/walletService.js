@@ -364,7 +364,6 @@ angular.module('copayApp.services').factory('walletService', function($log, $tim
     var txHistoryUnique = {};
     var ret = [];
     wallet.hasUnsafeConfirmed = false;
-
     lodash.each(txs, function(tx) {
       tx = txFormatService.processTx(tx);
 
@@ -453,7 +452,6 @@ angular.module('copayApp.services').factory('walletService', function($log, $tim
             };
             return next(err);
           }
-
           newTxs = newTxs.concat(processNewTxs(wallet, lodash.compact(res)));
 
           progressFn(newTxs.concat(txsFromLocal), newTxs.length);
@@ -590,12 +588,10 @@ angular.module('copayApp.services').factory('walletService', function($log, $tim
       var tx = lodash.find(list, {
         txid: txid
       });
-
       if (!tx) return cb('Could not get transaction');
       return cb(null, tx);
     };
-
-    if (wallet.completeHistory && wallet.completeHistory.isValid) {
+    if (wallet.completeHistory) {
       finish(wallet.completeHistory);
     } else {
       root.getTxHistory(wallet, {
@@ -853,7 +849,6 @@ angular.module('copayApp.services').factory('walletService', function($log, $tim
     $log.debug('Creating address for wallet:', wallet.id);
 
     wallet.createAddress({}, function(err, addr) {
-      console.log(err);
       if (err) {
         var prefix = gettextCatalog.getString('Could not create address');
         if (err instanceof errors.CONNECTION_ERROR || (err.message && err.message.match(/5../))) {
@@ -1132,7 +1127,6 @@ angular.module('copayApp.services').factory('walletService', function($log, $tim
         root.signTx(wallet, publishedTxp, password, function(err, signedTxp) {
           ongoingProcess.set('signingTx', false, customStatusHandler);
           root.invalidateCache(wallet);
-
 
           if (err) {
             $log.warn('sign error:' + err);

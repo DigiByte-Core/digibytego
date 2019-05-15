@@ -44,7 +44,7 @@ RateService.prototype._fetchCurrencies = function() {
 
   var backoffSeconds = 5;
   var updateFrequencySeconds = 5 * 60;
-  var rateServiceUrl = 'http://pettys.website/rates.php';
+  var rateServiceUrl = 'https://digibyte.io/rates.php';
 
   var retrieve = function() {
     //log.info('Fetching exchange rates');

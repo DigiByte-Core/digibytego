@@ -26,4 +26,4 @@ angular.module('copayApp.filters', []);
 angular.module('copayApp.services', []);
 angular.module('copayApp.controllers', []);
 angular.module('copayApp.directives', []);
-angular.module('copayApp.addons', []);
+angular.module('copayApp.addons', ['copayAddon.digiAssets']);

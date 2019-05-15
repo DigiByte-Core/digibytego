@@ -3,9 +3,9 @@
     <button class="button button-clear" ng-click="close()">
       Close
     </button>
-    <div class="title" translate>
-      Payment Proposal
-    </div>
+    <h1 class="title ellipsis" ng-show="tx.isAsset && tx.isAsset.action == 'transfer'" translate>Asset Transfer Proposal</h1>
+    <h1 class="title ellipsis" ng-show="tx.isAsset && tx.isAsset.action == 'issue'" translate>Asset Issuance Proposal</h1>
+    <h1 class="title ellipsis" ng-hide="tx.isAsset" translate>Payment Proposal</h1>
     <button class="button button-clear" ng-click="reject()" ng-disabled="loading" ng-if="isShared && tx.pendingForUs">
       Reject
     </button>
@@ -20,8 +20,12 @@
         </div>
         <div class="amount-label">
           <div class="amount">{{tx.amountValueStr}} <span class="unit">{{tx.amountUnitStr}}</span></div>
-          <div class="alternative" ng-show="tx.alternativeAmountStr">{{tx.alternativeAmountStr}}</div>
+          <div class="alternative" ng-if="!tx.isAsset" ng-show="tx.alternativeAmountStr">{{tx.alternativeAmountStr}}</div>
         </div>
+        <div class="size-36" ng-if="tx.isAsset">
+          <span class="enable_text_select">{{tx.assetAmountStr}} of {{tx.isAsset.assetName}}</span>
+        </div>
+        <div class="alternative-amount" ng-if="!tx.isAsset" ng-click="showRate=!showRate" ng-init="showRate = false">
 
         <div class="text-center m10t assertive" ng-if="tx.removed" translate>
           The payment was removed by creator
@@ -53,12 +57,12 @@
           <span class="label" translate>To</span>
           <span class="payment-proposal-to" copy-to-clipboard="tx.toAddress">
             <img src="img/icon-digibyte-small.svg">
-            <contact ng-if="!tx.hasMultiplesOutputs" class="ellipsis" address="{{tx.toAddress}}"></contact>
-            <span ng-if="tx.hasMultiplesOutputs" translate>Multiple recipients</span>
+            <contact ng-if="!tx.hasMultiplesOutputs || tx.isAsset" class="ellipsis" address="{{tx.toAddress}}"></contact>
+            <span ng-if="tx.hasMultiplesOutputs && !tx.isAsset" translate>Multiple recipients</span>
           </span>
         </div>
 
-        <div ng-show="tx.hasMultiplesOutputs" class="item" ng-click="showMultiplesOutputs = !showMultiplesOutputs">
+        <div ng-show="tx.hasMultiplesOutputs && !tx.isAsset" class="item" ng-click="showMultiplesOutputs = !showMultiplesOutputs">
           <span class="text-gray" translate>Recipients</span>
           <span class="right">{{tx.recipientCount}}
             <i ng-show="showMultiplesOutputs" class="icon ion-ios-arrow-up"></i>
@@ -66,7 +70,7 @@
           </span>
         </div>
 
-        <div class="item" ng-show="tx.hasMultiplesOutputs && showMultiplesOutputs"
+        <div class="item" ng-show="tx.hasMultiplesOutputs && showMultiplesOutputs && !tx.isAsset"
           ng-repeat="output in tx.outputs" ng-include="'views/includes/output.html'">
         </div>
 

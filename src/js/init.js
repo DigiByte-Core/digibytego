@@ -4,7 +4,11 @@ angular.element(document).ready(function() {
 
   // Run copayApp after device is ready.
   var startAngular = function() {
-    angular.bootstrap(document, ['copayApp']);
+    try {
+      angular.bootstrap(document, ['copayApp']);
+    } catch(e) {
+      console.log(e);
+    }
   };
 
 
@@ -35,7 +39,7 @@ angular.element(document).ready(function() {
     }, false);
 
   } else {
-    startAngular();
+    startAngular()
   }
 
 });

@@ -90,7 +90,8 @@ module.exports = function(grunt) {
           'src/js/routes.js',
           'src/js/services/*.js',
           'src/js/models/*.js',
-          'src/js/controllers/**/*.js'
+          'src/js/controllers/**/*.js',
+          'src/js/digiassets/**/*.js'
         ],
         tasks: ['concat:js']
       },
@@ -138,7 +139,8 @@ module.exports = function(grunt) {
           'bower_components/angular-mocks/angular-mocks.js',
           'bower_components/ngtouch/src/ngTouch.js',
           'angular-bitauth/angular-bitauth.js',
-          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js'
+          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js',
+          'bower_components/ng-file-upload/ng-file-upload.js'
         ],
         dest: 'www/lib/angular-components.js'
       },
@@ -156,6 +158,12 @@ module.exports = function(grunt) {
           'src/js/externalServices.js',
           'src/js/init.js',
           'src/js/trezor-url.js',
+          'src/js/digiassets/copayDigiAssets.js',
+          'src/js/digiassets/overrides/*.js',
+          'src/js/digiassets/controllers/**/*.js',
+          'src/js/digiassets/filters/*.js',
+          'src/js/digiassets/services/*.js',
+          'src/js/digiassets/directives/*.js',
           'bower_components/trezor-connect/connect.js',
           'node_modules/bezier-easing/dist/bezier-easing.min.js',
           'node_modules/cordova-plugin-qrscanner/dist/cordova-plugin-qrscanner-lib.min.js'
