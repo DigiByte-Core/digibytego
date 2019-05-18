@@ -22,13 +22,13 @@
         <div class="cc-assets-list" ng-show="assets">
             <div ng-repeat="asset in assets | orderBy:['assetName', 'utxo.txid']"
                 ng-click="openAssetModal(asset)"
-                class="row collapse cc-assets-list-item last-transactions-content">
-                <div class="large-1 medium-1 small-1 columns cc-asset-icon-column text-center">
+                style="display: flex; background-color: #fff; padding: 10px; cursor: pointer; border-bottom: 1px solid #A9A9A9; margin-bottom: 3px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);;">
+                <div class="cc-asset-icon-column text-center" style="flex-basis: 5%">
                     <img ng-src="{{ asset.icon }}" class="asset-icon icon" ng-show="asset.icon"/>
                     <img class="asset-icon icon cc-default-icon" ng-hide="asset.icon"/>
                     &nbsp;
                 </div>
-                <div class="large-4 medium-4 small-4 columns cc-asset-name-column">
+                <div class="cc-asset-name-column" style="flex-basis: 50%">
                     <div>
                         <span class="text-bold size-16">{{ asset.metadata.assetName }}</span>
                     </div>
@@ -36,16 +36,16 @@
                         {{ asset.metadata.description }}
                     </div>
                 </div>
-                <div class="large-3 medium-3 small-3 columns hide-for-small">
-                    <span class="size-14"><span translate>Issuer</span>: {{ asset.metadata.issuer }}</span>
+                <div class="" style="flex-basis: 30%">
+                    <span class="size-14"><span translate><b>Issuer</b></span>: {{ asset.metadata.issuer }}</span>
                 </div>
-                <div class="large-2 medium-2 small-2 columns text-right">
+                <div class="text-right" style="flex-basis: 15%">
                   <span class="size-16">
                     {{ asset.asset.amount }}
                     <i class="fi-lock" ng-show="asset.locked"></i>
                   </span>
                 </div>
-                <div class="large-1 medium-1 small-1 columns text-right">
+                <div class="text-right">
                     <i class="icon-arrow-right3 size-18"></i>
                 </div>
             </div>
@@ -59,7 +59,7 @@
             <div>Click below to issue an asset and get started!</div>
             <span class="nb">(<span translate>This requires some DigiBytes for the miner fee</span>)</span>
         </div>
-        <div class="issue-assets-btn">
+        <div class="issue-assets-btn" style="margin-top: 15px">
             <button ng-click="openIssueModal()" class="button black expand round size-12 text-spacing"
                 style="width: 100%; background-color: #0066cc; color: #fff;font-size: 1.2em;" translate>
                 Issue New Asset

@@ -30,6 +30,11 @@ angular.module('copayApp.controllers').controller('searchController', function($
         var comment = tx.note ? tx.note.body : '';
         var addressTo = tx.addressTo ? tx.addressTo : '';
         var txid = tx.txid ? tx.txid : '';
+        if(tx.isAsset) {
+          var assetName = tx.isAsset.assetName;
+          var assetId = tx.isAsset.assetId;
+          return ((tx.amountStr + message + addressTo + addrbook + searchableDate + comment + txid + assetName + assetId).toString()).toLowerCase();
+        }
         return ((tx.amountStr + message + addressTo + addrbook + searchableDate + comment + txid).toString()).toLowerCase();
       }
 

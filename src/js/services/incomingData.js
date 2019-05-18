@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('copayApp.services').factory('incomingData', function($log, $state, $timeout, $ionicHistory, bitcore, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
+angular.module('copayApp.services').factory('incomingData', function($log, $state, $timeout, $ionicHistory, $http, digiidService,
+  bitcore, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
 
   var root = {};
 
@@ -44,6 +45,15 @@ angular.module('copayApp.services').factory('incomingData', function($log, $stat
         return false;
       }
       return true;
+    }
+
+    function isValidDigiid(uri) {
+      var parser = document.createElement('a');
+      parser.href = uri;
+      if(parser.protocol === 'digiid:') {
+        return true;
+      }
+      return false;
     }
 
     function goSend(addr, amount, message) {
@@ -102,6 +112,13 @@ angular.module('copayApp.services').factory('incomingData', function($log, $stat
         goSend(addr, amount, message);
       }
       return true;
+
+    } else if (isValidDigiid(data)) {
+      $state.go('tabs.home').then(function() {
+        $state.transitionTo('tabs.home.authenticating', {
+          uri: data
+        });
+      });
 
       // Plain URL
     } else if (/^https?:\/\//.test(data)) {

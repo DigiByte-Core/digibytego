@@ -1,7 +1,7 @@
 {
   "packageName": "digibyte-go",
   "packageDescription": "DigiByte Go Wallet",
-  "packageNameId": "co.digibyte.digibytegaming",
+  "packageNameId": "io.digibyte.digibytegaming",
   "userVisibleName": "DigiByte Go",
   "purposeLine": "DigiByte Mobile Wallet",
   "bundleName": "digibytego",

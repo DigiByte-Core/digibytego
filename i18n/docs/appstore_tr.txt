@@ -20,4 +20,4 @@ Başlıca mobil ve masaüstü platformlarına senkronize erişim
 Özelleştirilebilir cüzdan adlandırma ve arka plan renkleri
 10 dil desteği (EN, JP, FR, ES, BT, DE, PT, RU, EL, TR)
 
-DigiByteGo, sahipli olmayan sunucular üzerinde çalışan açık kaynak kodlu bir yazılımdır. Yani işlevine devam etmek için herhangi bir firmanın düzenli desteğine ihtiyaç duymaz. İsteyen herkes DigiByteGo'in GitHub üzerindeki (https://github.com/bitpay/digibytego) açık kaynak koduna bakabilir veya katkıda bulunabilir. 
+DigiByteGo, sahipli olmayan sunucular üzerinde çalışan açık kaynak kodlu bir yazılımdır. Yani işlevine devam etmek için herhangi bir firmanın düzenli desteğine ihtiyaç duymaz. İsteyen herkes DigiByteGo'in GitHub üzerindeki (https://github.com/digibyte-core/digibytego) açık kaynak koduna bakabilir veya katkıda bulunabilir. 

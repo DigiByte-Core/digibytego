@@ -29,8 +29,8 @@ $v-digibyte-icon:                                     url('../img/app/icon-digib
 
 $v-button-primary-outline-active-color:              $v-text-primary-color;
 
-$v-button-secondary-bg:                              $v-secondary-color;
-$v-button-secondary-color:                           $v-accent-color;
+$v-button-secondary-bg:                              #fefefe !important;
+$v-button-secondary-color:                           #0066cc !important;
 $v-button-secondary-active-bg:                       darken($v-secondary-color, 10%);
 $v-button-secondary-clear-color:                     $v-accent-color;
 $v-button-secondary-outline-border:                  $v-accent-color;
@@ -47,7 +47,7 @@ $v-slide-text-color:                                 #FFFFFF;
 /* Onboarding */
 $v-onboarding-welcome-bg:                            none;
 $v-onboarding-color:                                 $v-text-secondary-color;
-$v-onboarding-bar-header-color:                      $v-text-primary-color;
+$v-onboarding-bar-header-color:                      #fefefe;
 $v-onboarding-bar-header-button-color:               $v-accent-color;
 
 $v-onboarding-tour-phone-bg:                         url(../img/app/onboarding/tour-phone.svg);
@@ -80,3 +80,15 @@ $v-tab-send-selected-icon:                           url('../img/app/tab-icons/i
   height: 120px !important;
 }
 
+.button-secondary {
+  font-weight: 800;
+}
+
+ .onboarding .button.button-secondary {
+  background-color: #fefefe !important;
+  color: #0066cc;  
+}
+
+ .onboarding .bar.bar-header button {
+  color: #fefefe !important;
+}

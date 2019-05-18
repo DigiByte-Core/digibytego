@@ -567,7 +567,7 @@ angular.module('copayApp.services')
       str = JSON.parse(str);
 
       if (!str.n) {
-        return cb("Backup format not recognized. If you are using a DigiByteGo Beta backup and version is older than 0.10, please see: https://github.com/bitpay/digibytego/issues/4730#issuecomment-244522614");
+        return cb("Backup format not recognized. If you are using a DigiByteGo Beta backup and version is older than 0.10, please see: https://github.com/digibyte-core/digibytego/issues/4730#issuecomment-244522614");
       }
 
       var addressBook = str.addressBook || {};

@@ -17,6 +17,8 @@
           <span ng-if="btx.action === 'sent'">{{'Sent' | translate}}</span>
           <span ng-if="btx.action === 'received'">{{'Received' | translate}}</span>
           <span ng-if="btx.action === 'moved'">{{'Moved' | translate}}</span>
+          <span ng-if="btx.isAsset.action == 'transfer'" style="padding-left: 5px">With Asset Transfer</span>
+
         </div>
         <div class="sending-label" ng-if="btx.confirmations === 0">
           <img src="img/icon-confirming.svg">
@@ -24,6 +26,7 @@
           <span ng-if="btx.action == 'received'" translate>Receiving</span>
         </div>
         <div class="amount-label">
+          <div class="amount" ng-if="btx.isAsset">{{btx.isAsset.amount}} <span class="unit">{{btx.isAsset.assetName}}</span></div>
           <div class="amount">{{btx.amountValueStr}} <span class="unit">{{btx.amountUnitStr}}</span></div>
           <div class="alternative" ng-click="showRate = !showRate">
             <span ng-if="!showRate">{{btx.alternativeAmountStr}}</span>
@@ -35,12 +38,21 @@
             </span>
           </div>
         </div>
+
       </div>
       <div class="info">
+        <div class="item" ng-if="btx.isAsset">
+            <span class="label" translate>Asset Name</span>
+            <span class="payment-proposal-to">
+              <div copy-to-clipboard="btx.assetNamebtx.isAsset.assetId" class="ellipsis">
+                <span class="m15l size-14">{{btx.isAsset.assetId}}</span>
+              </div>
+            </span>
+          </div>
         <div class="item" ng-if="btx.action === 'sent'">
           <span class="label" translate>To</span>
           <span class="payment-proposal-to">
-            <img ng-if="!cardId" src="img/icon-digibyte-small.svg">
+            <img ng-if="!cardId" src="img/icon-digibyte-small.png">
             <img ng-if="cardId" src="img/icon-card.svg" width="34">
             <div copy-to-clipboard="btx.addressTo" class="ellipsis">
               <contact ng-if="!toName" address="{{btx.addressTo}}" class="ellipsis" style="display: block;"></contact>

@@ -1,47 +1,40 @@
-<ion-modal-view ng-controller="assetDetailsController">
-  <ion-header-bar align-title="center" class="tab-bar" ng-style="{'background-color':color}">
-    <div class="left-small">
-      <a ng-click="cancel()" class="p10">
-        <span class="text-close" translate>Close</span>
-      </a>
-    </div>
-    <h1 class="title ellipsis" translate>Asset</h1>
+<ion-modal-view ng-controller="assetDetailsController" style="width: 80%; height: 80%; top: 10%; right: 10%; bottom: 20%; left: 10%; padding: 5px">
+  <ion-header-bar align-title="center" class="bar-royal">
+    <button class="button button-back button-clear" ng-click="cancel()">
+        Close
+    </button>
+    <h1 class="title">Asset</h1>
   </ion-header-bar>
 
-  <ion-content ng-style="{'background-color': '#F6F7F9'}">
+  <ion-content >
+    <div class="header-modal text-center">
+        <div ng-show="asset.locked">
+            <h4 class="title m0">
+                <div class="asset-alert">
+                    <i class="fi-info"></i>
+                    <span translate>Asset is locked by pending transfer</span>
+                </div>
+            </h4>
+        </div>
+        <img ng-src="{{ asset.icon }}" ng-show="asset.icon"/>
+        <div class="cc-default-icon" ng-show="!asset.icon"></div>
+        <div class="size-42">
+            {{ asset.metadata.assetName }}
+        </div>
+        <div class="size-18 m5t text-gray">
+            {{ asset.metadata.description }}
+        </div>
+    </div>
     <div class="modal-content">
-      <div ng-show="asset.locked">
-          <h4 class="title m0">
-              <div class="asset-alert">
-                  <i class="fi-info"></i>
-                  <span translate>Asset is locked by pending transfer</span>
-              </div>
-          </h4>
+      <div style="background-color: #f4f4f4; padding: 15px 5px 5px 5px">
+        <div class="text-center">
+          <button class="button button-positive" style="border-color: #A0A0A0; background-color: transparent;border-radius: 18px; width: 120px;" ng-click="openTransferModal(asset)" ng-disabled="asset.locked">
+            <span style="color: #1abb9b">Transfer</span>
+          </button>
+        </div>
+        <h4 class="title m0" translate>Details</h4>
       </div>
 
-      <div class="header-modal text-center">
-          <div class="cc-asset-icon">
-              <img ng-src="{{ asset.icon }}" ng-show="asset.icon"/>
-              <div class="cc-default-icon" ng-show="!asset.icon"></div>
-          </div>
-          <div class="size-42">
-              {{ asset.metadata.assetName }}
-          </div>
-          <div class="size-18 m5t text-gray">
-              {{ asset.metadata.description }}
-          </div>
-      </div>
-
-      <div>
-          <div class="text-center m20t">
-              <button class="button outline round light-gray tiny" ng-click="openTransferModal(asset)" ng-disabled="asset.locked">
-                  <span class="text-primary" translate>Transfer</span>
-              </button>
-          </div>
-      </div>
-
-
-      <h4 class="title m0" translate>Details</h4>
       <ul class="no-bullet size-14 m0">
           <li class="line-b p10 oh">
               <span class="text-gray property-name" translate>Asset Name</span>:
@@ -89,12 +82,10 @@
           </li>
       </ul>
 
-      <div class="m10t oh" ng-init="hideAdv=true">
-          <a class="button outline light-gray expand tiny" ng-click="hideAdv=!hideAdv">
-              <span translate ng-hide="!hideAdv">Show Advanced</span>
-              <span translate ng-hide="hideAdv">Hide Advanced</span>
-              <i ng-if="hideAdv" class="icon-arrow-down4"></i>
-              <i ng-if="!hideAdv" class="icon-arrow-up4"></i>
+      <div class="m10t oh" ng-init="hideAdv=true" style="padding-left: 10px">
+          <a class="button button-outline button-light button-small" ng-click="hideAdv=!hideAdv">
+              <span translate ng-hide="!hideAdv" style="color: #1abb9b">Show Advanced</span>
+              <span translate ng-hide="hideAdv" style="color: #1abb9b">Hide Advanced</span>
           </a>
       </div>
       <div ng-hide="hideAdv" class="m10t oh">
@@ -134,14 +125,14 @@
 
           <div ng-show="asset.issuanceTxid">
               <div class="text-center m20t">
-                  <button class="button outline round dark-gray tiny" ng-click="openBlockExplorer(asset)">
-                      <span class="text-gray" translate>See it on the blockchain</span>
+                  <button class="button button-outline button-light button-small" ng-click="openBlockExplorer(asset)">
+                      <span class="text-gray" style="color: #1abb9b" translate>See it on the blockchain</span>
                   </button>
               </div>
           </div>
       </div>
 
-      <div class="extra-margin-bottom"></div>
+      <div class="extra-margin-bottom" style="height:30px"></div>
     </div>
   </ion-content>
 </ion-modal-view>

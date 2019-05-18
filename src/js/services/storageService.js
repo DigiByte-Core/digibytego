@@ -610,5 +610,13 @@ angular.module('copayApp.services')
       storage.remove('txConfirmNotif-' + txid, cb);
     };
 
+    root.setDigiIDHistory = function(val, cb) {
+      storage.set('digiidHistory', val, cb);
+    };
+
+     root.getDigiIDHistory = function(cb) {
+      storage.get('digiidHistory', cb);
+    };
+
     return root;
   });

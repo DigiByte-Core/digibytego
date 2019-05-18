@@ -74,9 +74,9 @@ provide as much detail and context as possible.
 ## Support requests
 
 If you are having particular problem with your DigiByteGo instalation, please first [search older 
-issues](https://github.com/bitpay/digibytego/issues) in order to learn if the issue is already reported. It could be fixed already. 
+issues](https://github.com/digibyte-core/digibytego/issues) in order to learn if the issue is already reported. It could be fixed already. 
 
-Please also check our [FAQ](https://github.com/bitpay/digibytego/wiki/COPAY---FAQ).
+Please also check our [FAQ](https://github.com/digibyte-core/digibytego/wiki/COPAY---FAQ).
 
 When requesting support describe the issue as much in detail as possible. Consider to
 provide the following information:
@@ -94,7 +94,7 @@ If you need to provide personal / sensitive data to solve the issue (like the Wa
 We will provide a better channel (like an DigiByte Foundation email address) so you can send the information. If possible, please
 encrypt your emails using GnuPG.
 
-To open an issue go to [Github Issues](https://github.com/bitpay/digibytego/issues).
+To open an issue go to [Github Issues](https://github.com/digibyte-core/digibytego/issues).
 
 <a name="pull-requests"></a>
 ## Pull requests
