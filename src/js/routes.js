@@ -1167,6 +1167,15 @@ angular.module('copayApp').config(function(historicLogProvider, $provide, $logPr
         }
       }
     })
+    .state('tabs.home.digiidRequest', {
+      url: '/digiid/request',
+      views: {
+        'tab-home@tabs': {
+          controller: 'digiidController',
+          templateUrl: 'views/digiid/request.html'
+        }
+      }
+    })
     .state('tabs.preferencesDigiID', {
       url: '/preferencesDigiID',
       views: {

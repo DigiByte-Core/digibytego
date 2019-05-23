@@ -1,0 +1,41 @@
+<ion-view class="settings" show-tabs>
+    <ion-nav-bar class="bar-royal">
+      <ion-nav-title>DigiID Request</ion-nav-title>
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+  
+      <div class="wallet-details__list" >
+        <div ng-repeat="hist in history track by $index" >
+          <a class="wallet-details__item item">
+            <span>
+              <img class="wallet-details__tx-icon" src="img/cancel.svg" width="40" ng-show="!hist.success">
+              <img class="wallet-details__tx-icon" src="img/success.svg" width="40" ng-show="hist.success">
+            </span>
+            <div class="wallet-details__tx-content">
+  
+              <div class="wallet-details__tx-title" >
+                <div class="ellipsis">
+                    <div class="wallet-details__tx-message ellipsis" translate>{{hist.host}}</div>
+                </div>
+              </div>
+  
+              <span class="item-note text-right wallet-details__tx-amount">
+                  <span class="wallet-details__tx-amount wallet-details__tx-amount--received">
+                    <span  class="size-12">{{hist.address}}</span>
+                  </span>
+                  <div>
+                    <time class="wallet-details__tx-time" ng-if="hist.time && createdWithinPastDay(hist.time * 1000)">{{hist.time * 1000 | amTimeAgo}}</time>
+                    <time class="wallet-details__tx-time" ng-if="hist.time && !createdWithinPastDay(hist.time * 1000)">
+                      {{hist.time * 1000 | amDateFormat:'MMM D, YYYY'}}
+                    </time>                
+                  </div>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </ion-content>
+  </ion-view>
+  

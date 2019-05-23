@@ -5,36 +5,38 @@
     </ion-nav-back-button>
   </ion-nav-bar>
   <ion-content>
+    <form name="importForm" ng-submit="importLegacy.import(importForm)" novalidate>
 
-    <div class="wallet-details__list" >
-      <div ng-repeat="hist in history track by $index" >
-        <a class="wallet-details__item item">
-          <span>
-            <img class="wallet-details__tx-icon" src="img/cancel.svg" width="40" ng-show="!hist.success">
-            <img class="wallet-details__tx-icon" src="img/success.svg" width="40" ng-show="hist.success">
-          </span>
-          <div class="wallet-details__tx-content">
+      <label for="fromCloud" class="line-b oh m20b">
+        <span translate>Import from the Cloud?</span>
+        <switch id="fromCloud" name="fromCloud" ng-model="importLegacy.fromCloud" class="green right m5t m10b"></switch>
+      </label>
 
-            <div class="wallet-details__tx-title" >
-              <div class="ellipsis">
-                  <div class="wallet-details__tx-message ellipsis" translate>{{hist.host}}</div>
-              </div>
-            </div>
+      <label for="username">
+        <span ng-show="importLegacy.fromCloud" translate>Email</span>
+        <span ng-show="!importLegacy.fromCloud" translate>Username</span>
+        <input type="text" class="form-control" 
+        placeholder="{{importLegacy.fromCloud ? ('Email'|translate): ('Username'|translate)}}"
+        name="username" ng-model="importLegacy.username" autocapitalize="off" required>
+      </label>
 
-            <span class="item-note text-right wallet-details__tx-amount">
-                <span class="wallet-details__tx-amount wallet-details__tx-amount--received">
-                  <span  class="size-12">{{hist.address}}</span>
-                </span>
-                <div>
-                  <time class="wallet-details__tx-time" ng-if="hist.time && createdWithinPastDay(hist.time * 1000)">{{hist.time * 1000 | amTimeAgo}}</time>
-                  <time class="wallet-details__tx-time" ng-if="hist.time && !createdWithinPastDay(hist.time * 1000)">
-                    {{hist.time * 1000 | amDateFormat:'MMM D, YYYY'}}
-                  </time>                
-                </div>
-            </span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <label for="password">
+        <span translate>Password</span>
+        <input type="password" class="form-control" placeholder="{{'Your profile password'|translate}}"
+        name="password" ng-model="importLegacy.password" required>
+      </label>
+
+      <label for="server" ng-show="importLegacy.fromCloud">
+        <span translate>Server</span>
+        <input type="text" class="form-control" placeholder="{{'Server URL'}}"
+        name="server" ng-model="importLegacy.server" required>
+      </label>
+
+      <button translate type="submit"
+        class="button black round expand m0"
+        ng-disabled="importForm.$invalid">
+        Import
+      </button>
+    </form>
   </ion-content>
 </ion-view>

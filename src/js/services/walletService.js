@@ -849,6 +849,7 @@ angular.module('copayApp.services').factory('walletService', function($log, $tim
     $log.debug('Creating address for wallet:', wallet.id);
 
     wallet.createAddress({}, function(err, addr) {
+      console.log(err);
       if (err) {
         var prefix = gettextCatalog.getString('Could not create address');
         if (err instanceof errors.CONNECTION_ERROR || (err.message && err.message.match(/5../))) {

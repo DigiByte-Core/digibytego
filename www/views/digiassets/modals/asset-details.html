@@ -8,22 +8,22 @@
 
   <ion-content >
     <div class="header-modal text-center">
-        <div ng-show="asset.locked">
-            <h4 class="title m0">
-                <div class="asset-alert">
-                    <i class="fi-info"></i>
-                    <span translate>Asset is locked by pending transfer</span>
-                </div>
-            </h4>
-        </div>
-        <img ng-src="{{ asset.icon }}" ng-show="asset.icon"/>
-        <div class="cc-default-icon" ng-show="!asset.icon"></div>
-        <div class="size-42">
-            {{ asset.metadata.assetName }}
-        </div>
-        <div class="size-18 m5t text-gray">
-            {{ asset.metadata.description }}
-        </div>
+      <div ng-show="asset.locked">
+        <h4 class="title m0">
+          <div class="asset-alert">
+            <i class="fi-info"></i>
+            <span translate>Asset is locked by pending transfer</span>
+          </div>
+        </h4>
+      </div>
+      <img ng-src="{{ asset.icon }}" ng-show="asset.icon"/>
+      <div class="cc-default-icon" ng-show="!asset.icon"></div>
+      <div class="size-42">
+        {{ asset.metadata.assetName }}
+      </div>
+      <div class="size-18 m5t text-gray">
+        {{ asset.metadata.description }}
+      </div>
     </div>
     <div class="modal-content">
       <div style="background-color: #f4f4f4; padding: 15px 5px 5px 5px">
