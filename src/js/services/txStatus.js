@@ -9,6 +9,7 @@ angular.module('copayApp.services').factory('txStatus', function(lodash, profile
     var status = txp.status;
     var type;
     var INMEDIATE_SECS = 10;
+    var wallet =  profileService.getWallet(txp.walletId);
 
     if (status == 'broadcasted') {
       type = 'broadcasted';
@@ -16,7 +17,7 @@ angular.module('copayApp.services').factory('txStatus', function(lodash, profile
 
       var n = txp.actions.length;
       var action = lodash.find(txp.actions, {
-        copayerId: fc.credentials.copayerId
+        copayerId: wallet.credentials.copayerId
       });
 
       if (!action) {

@@ -53,7 +53,7 @@ var AssetIssueController = function ($stateParams, $rootScope, $scope, $timeout,
         asset: {
           action: 'issue',
           assetName: issuance.assetName,
-          icon: 'https://raw.githubusercontent.com/DigiByte-Core/digibyte-logos/master/DigiAsset%20Icons/gear.png',
+          icon: issuance.logoURL,
           amount: issuance.amount
         }
       };

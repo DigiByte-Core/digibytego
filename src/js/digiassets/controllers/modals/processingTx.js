@@ -246,28 +246,7 @@ ProcessingTxController.prototype._createAndExecuteProposal = function (wallet, t
       showError('Could not create transaction', bwcError.msg(err));
       return;
     }
-    publishAndSign(ctxp, function() {}, function(err, txSent) {
-      if (err) {
-        self.ongoingProcess.set('sendingTx', false, statusChangeHandler);
-        showError('Could not send transaction', err);
-        return;
-      }
-      //$log.debug('Transaction broadcasted. Waiting for confirmation...');
-      self._closeModal();
-      var type = self.txStatus.notify(txSent);
-      self._openStatusModal(type, txSent, function() {
-        self.$scope.$emit('Local/TxProposalAction', txSent.status == 'broadcasted');
-      });
-    });
-  });
-  /*self.walletService.createTx(wallet, txp, function(err, createdTxp) {
-    self.ongoingProcess.set('creatingTx', false);
-    if (err) {
-      return self._setError(err);
-    }
-    console.log(createdTxp, wallet.canSign(), wallet.isPrivKeyExternal());
     if (!wallet.canSign() && !wallet.isPrivKeyExternal()) {
-      self.$log.info('No signing proposal: No private key');
       self.ongoingProcess.set('sendingTx', true);
       self.walletService.publishTx(wallet, createdTxp, function(err, publishedTxp) {
         self.ongoingProcess.set('sendingTx', false);
@@ -281,12 +260,24 @@ ProcessingTxController.prototype._createAndExecuteProposal = function (wallet, t
         });
       });
     } else {
-      console.log('got here');
-      self.$rootScope.$emit('Local/NeedsConfirmation', createdTxp, function(accept) {
-        console.log(accept);
-        if (accept) self._confirmTx(createdTxp);
-        else self.$scope.cancel();
+      publishAndSign(ctxp, function() {}, function(err, txSent) {
+        if (err) {
+          showError('Could not send transaction', err);
+          return;
+        }
+        self._closeModal();
+        if (txSent.status == 'accepted') {
+          var type = self.txStatus.notify(txSent);
+          self._openStatusModal(type, txSent, function() {
+            self.$scope.$emit('Local/TxProposalAction', txSent.status == 'broadcasted');
+          });
+        } else {
+          var type = self.txStatus.notify(txSent);
+          self._openStatusModal(type, txSent, function() {
+            self.$scope.$emit('Local/TxProposalAction');
+          });
+        }
       });
     }
-  });*/
+  });
 };

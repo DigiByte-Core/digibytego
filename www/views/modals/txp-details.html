@@ -22,7 +22,7 @@
           <div class="amount">{{tx.amountValueStr}} <span class="unit">{{tx.amountUnitStr}}</span></div>
           <div class="alternative" ng-if="!tx.isAsset" ng-show="tx.alternativeAmountStr">{{tx.alternativeAmountStr}}</div>
         </div>
-        <div class="size-36" ng-if="tx.isAsset">
+        <div class="size-36" style="line-height: 50px" ng-if="tx.isAsset">
           <span class="enable_text_select">{{tx.assetAmountStr}} of {{tx.isAsset.assetName}}</span>
         </div>
         <div class="alternative-amount" ng-if="!tx.isAsset" ng-click="showRate=!showRate" ng-init="showRate = false">

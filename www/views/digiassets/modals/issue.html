@@ -29,6 +29,18 @@
           </div>
         </div>
         <div>
+            <div class="row collapse">
+              <label for="logoURL" class="left">
+                <span translate>Logo URL</span>
+              </label>
+            </div>
+            <div class="input">
+              <input type="text" id="logoURL" name="logoURL" ng-disabled="assets.blockUx"  style="width: 100%;background-color: #f4f4f4;padding-left: 5px"
+                ng-attr-placeholder="{{'Logo URL' | translate}}" ng-model="issuance.logoURL"
+                required ng-focus="home.formFocus('logoURL')" ng-blur="home.formFocus(false)">
+            </div>
+          </div>
+        <div>
           <div class="row collapse">
             <label for="issuer" class="left">
               <span translate>Issuer</span>
@@ -83,7 +95,7 @@
             <div style="flex-basis: 80%">
               <input type="text" id="description" name="description" ng-disabled="assets.blockUx" style="width: 100%;background-color: #f4f4f4;padding-left: 5px"
                 ng-attr-placeholder="{{'Value' | translate}}" ng-model="field.value">
-              <a class="postfix size-12 m0 text-gray" ng-click="removeField(field)">
+              <a class="postfix size-12 m0" style="background-color: red !important" ng-click="removeField(field)">
                 <i class="fi-minus-circle size-18"></i>
               </a>
             </div>
