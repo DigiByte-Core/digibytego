@@ -58,9 +58,9 @@
     "bitauth": "^0.2.1",
     "digibytejs-wallet-client": "git://github.com/digibyte-core/digibytejs-wallet-client.git#40c4e212eef8fe8ecd782f9e03defb79909861a8",
     "bower": "^1.7.9",
-    "cordova-android": "5.1.1",
+    "cordova-android": "7.1.2",
     "cordova-custom-config": "^3.0.5",
-    "cordova-plugin-qrscanner": "^2.5.0",
+    "cordova-plugin-qrscanner": "^2.6.1",
     "coveralls": "^2.11.9",
     "express": "^4.11.2",
     "fs": "0.0.2",
@@ -116,7 +116,7 @@
     "clean-all":              "git clean -dfx"
   },
   "devDependencies": {
-    "cordova": "^6.3.1",
+    "cordova": "^7.1.0",
     "grunt": "^1.0.1",
     "ionic": "^2.1.0",
     "trash-cli": "^1.4.0",

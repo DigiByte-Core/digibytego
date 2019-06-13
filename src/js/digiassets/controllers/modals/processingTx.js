@@ -198,6 +198,7 @@ ProcessingTxController.prototype._createAndExecuteProposal = function (wallet, t
 
   var inputs = self._.map(tx.inputs, function (input) {
     input = input.toObject();
+    console.log(input);
     input = self.digiAssets.txidToUTXO[input.prevTxId + ":" + input.outputIndex];
     input.outputIndex = input.vout;
     return input;

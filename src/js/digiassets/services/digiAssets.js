@@ -155,8 +155,8 @@ function DigiAssets($rootScope, $stateParams, profileService, daConfig, daFeeSer
     wallet.getUtxos({}, function(err, utxos) {
       if (err) { return cb(err); }
 
+      console.log(utxos);
       _setLockedUtxos(utxos);
-
       root.txidToUTXO = lodash.reduce(utxos, function(result, utxo) {
         result[utxo.txid + ":" + utxo.vout] = utxo;
         return result;
@@ -189,6 +189,7 @@ function DigiAssets($rootScope, $stateParams, profileService, daConfig, daFeeSer
   };
 
   root.getColoredUtxos = function() {
+    console.log(lodash.map(root.assets, function(asset) { return asset.utxo.txid + ":" + asset.utxo.index; }));
     return lodash.map(root.assets, function(asset) { return asset.utxo.txid + ":" + asset.utxo.index; });
   };
 
