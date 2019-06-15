@@ -44,6 +44,13 @@ var AssetIssueController = function ($stateParams, $rootScope, $scope, $timeout,
   var createAsset = function(issuance, iconData) {
     self.setOngoingProcess(gettext('Creating issuance transaction'));
     var wallet = profileService.getWallet($stateParams.walletId);
+    var icon = {
+      name: 'icon',
+      url: issuance.logoURL,
+      mimeType: "image/png"      
+    };
+    issuance.urls = [];
+    issuance.urls.push(icon);
     digiAssets.createIssueTx(issuance, wallet, function (err, result) {
       if (err) {
         return self._handleError(err);
@@ -53,7 +60,7 @@ var AssetIssueController = function ($stateParams, $rootScope, $scope, $timeout,
         asset: {
           action: 'issue',
           assetName: issuance.assetName,
-          icon: issuance.logoURL,
+          urls: [icon],
           amount: issuance.amount
         }
       };
