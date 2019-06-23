@@ -1,39 +1,37 @@
 {
   "project_info": {
-    "project_number": "149194066736",
-    "firebase_url": "https://bitpay-wallet.firebaseio.com",
-    "project_id": "bitpay-wallet",
-    "storage_bucket": "bitpay-wallet.appspot.com"
+    "project_number": "220132748741",
+    "firebase_url": "https://digibyte-go.firebaseio.com",
+    "project_id": "digibyte-go",
+    "storage_bucket": "digibyte-go.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:149194066736:android:6de8942b48fea047",
+        "mobilesdk_app_id": "1:220132748741:android:090f5e96cc38065c",
         "android_client_info": {
           "package_name": "io.digibyte.digibytego"
         }
       },
       "oauth_client": [
         {
-          "client_id": "149194066736-1gf0d9nk288dke5jdiuj8unkplhl8nco.apps.googleusercontent.com",
+          "client_id": "220132748741-7pdq0q2bf68h4o083qa1icjl5nsm1hj9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCZ8nyjRBe-0Lyur0LjO-SOkjv32uNQKy0"
+          "current_key": "AIzaSyA2U8-_wZGDxOP3XQQt2Kulh8Em_ImE-DA"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220132748741-7pdq0q2bf68h4o083qa1icjl5nsm1hj9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
